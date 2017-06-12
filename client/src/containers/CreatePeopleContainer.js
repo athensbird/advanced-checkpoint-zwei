@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import CreatePeople from "../components/CreatePeople";
+import {createPerson} from "../actions";
 
 function mapStateToProps(state) {
   return {
@@ -8,7 +9,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {createPerson: (person) => {
+    dispatch(createPerson(person));
+  }};
 }
 
 export default connect(

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function PersonDetail(props) {
   const personId = props.match.params.id;
-  const person = props.people.find(u => u.id === personId) || {};
+  const person = props.people.find(p => p._id == personId) || {};
   return (
     <div>
       <div>

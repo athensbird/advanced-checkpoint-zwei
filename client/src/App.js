@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {ListOfPersonContainer} from "./containers/ListOfPersonContainer";
-import {CreatePeopleContainer} from "./containers/CreatePeopleContainer";
-import {PersonDetailContainer} from "./containers/PersonDetailContainer";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import ListOfPersonContainer from "./containers/ListOfPersonContainer";
+import CreatePeopleContainer from "./containers/CreatePeopleContainer";
+import PersonDetailContainer from "./containers/PersonDetailContainer";
 
 class App extends Component {
   constructor() {
@@ -17,8 +17,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          <div className="links">
+            <Link to="/list">List</Link>
+            <br />
+            <Link to="/create">Create a Person</Link>
+          </div>
           <Switch>
-            <Route path="/list" component={ListOfPersonContainer} />
+            <Route path="/list" exact component={ListOfPersonContainer} />
             <Route path="/create" component={CreatePeopleContainer} />
             <Route path="/list/:id" component={PersonDetailContainer} />
           </Switch>

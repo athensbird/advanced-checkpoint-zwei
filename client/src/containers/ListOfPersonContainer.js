@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import ListOfPerson from "../components/ListOfPerson";
+import {deletePerson} from "../actions";
 
 function mapStateToProps(state) {
   return {
@@ -8,7 +9,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    deletePerson: () => {
+      dispatch(deletePerson());
+    }
+  };
 }
 
 export default connect(
