@@ -1,10 +1,20 @@
 import App from "./App";
 import "./App.css";
 import { connect } from "react-redux";
+import {loadPeople} from "./actions";
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
   return {
+    people: state.people
   };
 }
 
-export default connect(null,mapDispatchToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    loadPeople: () => {
+      dispatch(loadPeople());
+    }
+  };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
