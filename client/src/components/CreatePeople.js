@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 
 class CreatePeople extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       Name: "",
       Alter: 20,
@@ -11,6 +11,32 @@ class CreatePeople extends Component {
       Heimat: ""
     };
   }
+  handleHeimat(event) {
+    this.setState({
+      Heimat: event.target.value
+    });
+  }
+
+  handleName() {
+    this.setState({
+      Name: event.target.value
+    });
+  }
+
+  handleAlter() {
+    this.setState({
+      Alter: event.target.value
+    });
+  }
+
+  handleGipfel() {
+    console.log("Gipfel triggered.");
+    console.log(event);
+    this.setState({
+      Gipfel: 182
+    });
+  }
+
   render() {
     return (
       <div>
@@ -21,32 +47,26 @@ class CreatePeople extends Component {
           }
         }}>
           Name: <input
-            onChange={(event) => {
-              this.setState({
-                name: event.target.value
-              });
-            }} />
+            onChange={this.handleName.bind(this)}
+            value={this.state.Name}
+            placeholder="Enter your name" />
           <br />
           Alter: <input
-            onChange={(event) => {
-              this.setState({
-                Alter: event.target.value
-              });
-            }} />
+            onChange={this.handleAlter.bind(this)}
+            value={this.state.Alter}
+            placeholder="Enter your age" />
           <br />
           Gipfel: <input
-            onChange={(event) => {
-              this.setState({
-                Gipfel: event.target.value
-              });
-            }} />
+            onChange={this.handleGipfel.bind(this)}
+            value={this.state.Gipfel}
+            placeholder="Enter your height" />
           <br />
-          Heimat: <input
-            onChange={(event) => {
-              this.setState({
-                Heimat: event.target.value
-              });
-            }} />
+          Heimat:
+          <input
+            onChange={this.handleHeimat.bind(this)}
+            placeholder="Enter your hometown"
+            value={this.state.Heimat}
+          />
           <br />
           <button>Create Person</button>
         </form>

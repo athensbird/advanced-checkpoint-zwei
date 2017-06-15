@@ -9,11 +9,9 @@ function ListOfPerson(props) {
         <br />
         <div>
           Name: {person.Name}
-          <button>Delete</button>
         </div>
         <div>
           Alter: {person.Alter}
-          <button>Delete</button>
         </div>
         <div>
           Gipfel: {person.Gipfel}

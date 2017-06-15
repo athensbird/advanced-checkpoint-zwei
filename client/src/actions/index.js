@@ -4,12 +4,13 @@ export function loadPeople() {
   return function (dispatch) {
     fetch("/list")
     .then((res) => {
+      console.log(res);
       return res.json();
     })
     .then((people) => {
       dispatch(peopleLoaded(people));
     }).catch((err) => {
-      console.log(err);
+      dispatch(peopleLoadedError(err));
     });
   };
 }
@@ -18,6 +19,13 @@ export function peopleLoaded(people) {
   return {
     type: "PEOPLE_LOADED",
     value: people
+  };
+}
+
+export function peopleLoadedError(err) {
+  return {
+    type: "PEOPLE_LOADED_ERROR",
+    err
   };
 }
 
