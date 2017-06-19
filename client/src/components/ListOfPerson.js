@@ -15,7 +15,7 @@ function ListOfPerson(props) {
         </div>
         <div>
           Gipfel: {person.Gipfel}
-          <button>Delete</button>
+          <button onClick={props.deletePerson(person._id)}>Delete</button>
         </div>
         <br />
         <Link to={"/list/" + person._id}>Detail Page</Link>
@@ -27,6 +27,7 @@ function ListOfPerson(props) {
 
 ListOfPerson.propTypes = {
   people: PropTypes.array.isRequired,
+  deletePerson: PropTypes.func
 };
 
 export default ListOfPerson;

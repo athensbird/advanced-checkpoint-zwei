@@ -12,6 +12,16 @@ const app = express();
 
 // always put bodyparser before customized middlewares
 app.use(bodyParser.json());
+
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers",
+             "Origin, X-Requested-With, Content-Type, Accept, access-control-allow-origin");
+  res.header("Access-Control-Allow-Methods", "PUT, DELETE, GET, POST");
+  next();
+});
+
 app.use(PeopleRoutes);
 
 mongoose.set("debug", true);

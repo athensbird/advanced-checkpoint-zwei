@@ -3,16 +3,15 @@ import PropTypes from "prop-types";
 
 function PersonDetail(props) {
   const personId = props.match.params.id;
+  // eslint-disable-next-line
   const person = props.people.find(p => p._id == personId) || {};
   return (
     <div>
       <div>
        Name: {person.Name}
-        <button>Delete</button>
       </div>
       <div>
        Alter: {person.Alter}
-        <button>Delete</button>
       </div>
       <div>
        Gipfel: {person.Gipfel}
@@ -30,7 +29,8 @@ PersonDetail.propTypes = {
     Gipfel: PropTypes.Number
   },
   people: PropTypes.array,
-  match: PropTypes.object
+  match: PropTypes.object,
+  deletePerson: PropTypes.func
 };
 
 export default PersonDetail;

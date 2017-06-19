@@ -17,23 +17,21 @@ class CreatePeople extends Component {
     });
   }
 
-  handleName() {
+  handleName(event) {
     this.setState({
       Name: event.target.value
     });
   }
 
-  handleAlter() {
+  handleAlter(event) {
     this.setState({
       Alter: event.target.value
     });
   }
 
-  handleGipfel() {
-    console.log("Gipfel triggered.");
-    console.log(event);
+  handleGipfel(event) {
     this.setState({
-      Gipfel: 182
+      Gipfel: event.target.value
     });
   }
 

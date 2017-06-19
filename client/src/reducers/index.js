@@ -1,11 +1,12 @@
 import {combineReducers} from "redux";
 import {
-  peopleLoaded
+  PEOPLE_LOADED
 } from "../actions";
 
 function people(state = [], action) {
   switch (action.type) {
-    case peopleLoaded:
+    case PEOPLE_LOADED:
+      console.log(action);
       return action.value;
   }
   return state;

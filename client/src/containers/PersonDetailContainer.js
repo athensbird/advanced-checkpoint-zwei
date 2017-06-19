@@ -7,10 +7,14 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     deletePerson: () => {
+//       dispatch(deletePerson());
+//     }
+//   };
+// }
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
+  mapStateToProps, null
 )(PersonDetail);
