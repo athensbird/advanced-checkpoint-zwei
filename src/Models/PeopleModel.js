@@ -2,16 +2,16 @@
 const mongoose = require("mongoose");
 
 const PeopleSchema = new mongoose.Schema({
-  _id:{
-    type: Number
-  },
+  // _id:{
+  //   type: Number
+  // },
   Name: {
     type: String
   },
   Alter: {
     type: Number
   },
-  Gipfel: {
+  Große: {
     type: Number
   },
   Heimat: {

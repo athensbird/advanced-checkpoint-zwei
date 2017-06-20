@@ -14,8 +14,14 @@ function ListOfPerson(props) {
           Alter: {person.Alter}
         </div>
         <div>
-          Gipfel: {person.Gipfel}
-          <button onClick={props.deletePerson(person._id)}>Delete</button>
+          Große: {person.Große}
+          <button onClick={
+            () => {
+              console.log("person id clicked", person._id);
+              props.deletePerson(person._id);
+            }
+            // props.deletePerson(person._id)
+          }>Delete</button>
         </div>
         <br />
         <Link to={"/list/" + person._id}>Detail Page</Link>

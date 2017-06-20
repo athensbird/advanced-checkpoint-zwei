@@ -10,9 +10,9 @@ class App extends Component {
   constructor() {
     super();
   }
-  componentDidMount() {
-    this.props.loadPeople();
-  }
+  // componentDidMount() {
+  //   this.props.loadPeople();
+  // }
   render() {
     return (
       <BrowserRouter>

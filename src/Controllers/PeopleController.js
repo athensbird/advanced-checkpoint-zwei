@@ -31,7 +31,7 @@ const PeopleController = {
       .then(person => {
         person.Name = req.body.name || person.Name;
         person.Alter = req.body.Alter || person.Alter;
-        person.Gipfel = req.body.Gipfel || person.Gipfel;
+        person.Große = req.body.Große || person.Große;
         person.Heimat = req.body.Heimat || person.Heimat;
         person.save()
       })

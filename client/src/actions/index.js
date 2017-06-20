@@ -12,6 +12,7 @@ export function loadPeople() {
     .then((people) => {
       console.log(people);
       dispatch(peopleLoaded(people));
+      return;
     }).catch((err) => {
       dispatch(peopleLoadedError(err));
     });
@@ -57,6 +58,7 @@ export function createPerson(person) {
 
 export function deletePerson(id) {
   return function (dispatch) {
+    console.log("Delete ID: ", id);
     fetch("http://localhost:5000/list/" + id, {
       method: "DELETE",
       headers: {"Content-Type": "application/json"}

@@ -14,7 +14,7 @@ function PersonDetail(props) {
        Alter: {person.Alter}
       </div>
       <div>
-       Gipfel: {person.Gipfel}
+       Große: {person.Große}
         <button>Delete</button>
       </div>
       <br />
@@ -26,7 +26,7 @@ PersonDetail.propTypes = {
   person: {
     Name: PropTypes.String,
     Alter: PropTypes.Number,
-    Gipfel: PropTypes.Number
+    Große: PropTypes.Große
   },
   people: PropTypes.array,
   match: PropTypes.object,

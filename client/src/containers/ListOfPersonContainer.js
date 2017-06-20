@@ -10,8 +10,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deletePerson: () => {
-      dispatch(deletePerson());
+    deletePerson: (id) => {
+      dispatch(deletePerson(id));
     }
   };
 }

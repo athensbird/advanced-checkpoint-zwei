@@ -7,10 +7,11 @@ class CreatePeople extends Component {
     this.state = {
       Name: "",
       Alter: 20,
-      Gipfel: 175,
+      Große: 175,
       Heimat: ""
     };
   }
+
   handleHeimat(event) {
     this.setState({
       Heimat: event.target.value
@@ -29,9 +30,9 @@ class CreatePeople extends Component {
     });
   }
 
-  handleGipfel(event) {
+  handleGroße(event) {
     this.setState({
-      Gipfel: event.target.value
+      Große: event.target.value
     });
   }
 
@@ -54,9 +55,9 @@ class CreatePeople extends Component {
             value={this.state.Alter}
             placeholder="Enter your age" />
           <br />
-          Gipfel: <input
-            onChange={this.handleGipfel.bind(this)}
-            value={this.state.Gipfel}
+          Große: <input
+            onChange={this.handleGroße.bind(this)}
+            value={this.state.Große}
             placeholder="Enter your height" />
           <br />
           Heimat:
