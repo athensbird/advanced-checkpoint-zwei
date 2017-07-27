@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const PeopleRoutes = require("./Routes/PeopleRoutes");
 const bodyParser = require("body-parser");
+const request = require("request");
+const proxy = require("http-proxy-middleware");
 // const People = require("./Models/PeopleModel");
 
 // import mongoose from "mongoose";
@@ -13,6 +15,7 @@ const app = express();
 // always put bodyparser before customized middlewares
 app.use(bodyParser.json());
 
+app.use('/api', proxy({target: "https://od-api.oxforddictionaries.com", changeOrigin: true }));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -23,6 +26,10 @@ app.use((req, res, next) => {
 });
 
 app.use(PeopleRoutes);
+app.use('/', (req, res) => {
+  const url = 'https://od-api.oxforddictionaries.com/api/v1' + req.url;
+  req.pipe(request(url).pipe(res));
+});
 
 mongoose.set("debug", true);
 mongoose.Promise = global.Promise;

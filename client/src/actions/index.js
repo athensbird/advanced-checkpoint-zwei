@@ -1,5 +1,6 @@
 import "whatwg-fetch";
 export const PEOPLE_LOADED = "PEOPLE_LOADED";
+export const WORD_LOADED = "WORD_LOADED";
 
 export function loadPeople() {
   return function (dispatch) {
@@ -24,6 +25,13 @@ export function peopleLoaded(people) {
   return {
     type: PEOPLE_LOADED,
     value: people
+  };
+}
+
+export function wordLoaded(res) {
+  return {
+    type: WORD_LOADED,
+    definition: res.results.lexicalEntries.entries.senses.definitions
   };
 }
 
@@ -65,5 +73,26 @@ export function deletePerson(id) {
     }).then(() => {
       dispatch(loadPeople());
     });
+  };
+}
+
+export function lookUp(word) {
+  return function (dispatch) {
+    console.log("Lookup triggered!", word);
+    const myheader = {
+      // eslint-disable-next-line
+      "Accept": "application/json",
+      // eslint-disable-next-line
+      "app_id": "7ebba1c9",
+      // eslint-disable-next-line
+      "app_key": "c5379b69b507e37aef06a8736e88c428",
+      "Access-Control-Allow-Origin": "*",
+    };
+    fetch("https://od-api.oxforddictionaries.com/api/v1/en/entries/en" + word, {
+      method: "GET",
+      headers: myheader
+    }).then(res => {
+      dispatch(wordLoaded(res));
+    }).catch(err => console.log(err));
   };
 }

@@ -15,7 +15,6 @@ function PersonDetail(props) {
       </div>
       <div>
        Große: {person.Große}
-        <button>Delete</button>
       </div>
       <br />
     </div>

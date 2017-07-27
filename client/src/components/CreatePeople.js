@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 class CreatePeople extends Component {
   constructor(props) {
@@ -8,9 +9,17 @@ class CreatePeople extends Component {
       Name: "",
       Alter: 20,
       Große: 175,
-      Heimat: ""
+      Heimat: "",
+      created: false
     };
   }
+  //
+  // handleCreate() {
+  //   this.setState({
+  //     created: !this.state.created,
+  //     message: this.state.created ? `Person ${this.state.Name} successfully created!` : ""
+  //   });
+  // }
 
   handleHeimat(event) {
     this.setState({
@@ -69,6 +78,8 @@ class CreatePeople extends Component {
           <br />
           <button>Create Person</button>
         </form>
+        <div>{this.state.message}</div>
+        <Link to={"/list/"}>Back to List</Link>
       </div>
     );
   }

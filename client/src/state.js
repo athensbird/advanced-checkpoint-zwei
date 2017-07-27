@@ -14,5 +14,6 @@ export default {
       Große: 171,
       Heimat: "Dresden"
     }
-  ]
+  ],
+  word: null
 };

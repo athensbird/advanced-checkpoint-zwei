@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 import {
-  PEOPLE_LOADED
+  PEOPLE_LOADED, WORD_LOADED
 } from "../actions";
 
 function people(state = [], action) {
@@ -12,8 +12,16 @@ function people(state = [], action) {
   return state;
 }
 
+function word(state = [], action) {
+  switch (action.type) {
+    case WORD_LOADED:
+      return action.definition;
+  }
+  return state;
+}
 
 const rootReducer = combineReducers({
-  people
+  people,
+  word
 });
 export default rootReducer;

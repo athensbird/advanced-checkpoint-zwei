@@ -5,6 +5,7 @@ import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import ListOfPersonContainer from "./containers/ListOfPersonContainer";
 import CreatePeopleContainer from "./containers/CreatePeopleContainer";
 import PersonDetailContainer from "./containers/PersonDetailContainer";
+import DictionaryContainer from "./containers/DictionaryContainer";
 
 class App extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path="/list" exact component={ListOfPersonContainer} />
             <Route path="/create" component={CreatePeopleContainer} />
             <Route path="/list/:id" component={PersonDetailContainer} />
+            <Route path="/api" component={DictionaryContainer} />
           </Switch>
         </div>
       </BrowserRouter>
