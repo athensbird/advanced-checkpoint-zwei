@@ -57,5 +57,5 @@
     "request": "^2.81.0",
     "whatwg-fetch": "^2.0.3"
   },
-  "proxy": {"/api":"https://od-api.oxforddictionaries.com/api/v1"}
+  "proxy": "http://localhost:3001"
 }

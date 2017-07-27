@@ -9,13 +9,21 @@ const proxy = require("http-proxy-middleware");
 // import mongoose from "mongoose";
 // import PeopleRoutes from "./Routes/PeopleRoutes";
 // import bodyParser from "body-parser";
+var dp = proxy({
+        target: "https://od-api.oxforddictionaries.com/api/v1",
+        changeOrigin: true,
+        ws: true,
+        router: {
+          "https://od-api.oxforddictionaries.com/api/v1" : "https://localhost:5100"
+        }
+    });
 
 const app = express();
 
+app.use('/api', dp);
+
 // always put bodyparser before customized middlewares
 app.use(bodyParser.json());
-
-app.use('/api', proxy({target: "https://od-api.oxforddictionaries.com", changeOrigin: true }));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,10 +34,6 @@ app.use((req, res, next) => {
 });
 
 app.use(PeopleRoutes);
-app.use('/', (req, res) => {
-  const url = 'https://od-api.oxforddictionaries.com/api/v1' + req.url;
-  req.pipe(request(url).pipe(res));
-});
 
 mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
