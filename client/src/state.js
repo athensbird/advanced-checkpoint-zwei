@@ -15,5 +15,6 @@ export default {
       Heimat: "Dresden"
     }
   ],
-  word: null
+  word: null,
+  wordList: []
 };

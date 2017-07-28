@@ -52,21 +52,19 @@ app.get('/api/:word', function(req,res){
   }
 
   request(options,function(err,apiResponse,body){
-    if(err) {
+    if (err) {
       console.error(err)
       return res.sendStatus(400)
     }
-    else  {
+    else {
       console.log(body)
       try{
         body = JSON.parse(body)
-      } catch(e){}
+      } catch(e) {}
       var def=''
       try{
         def = body.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0]
-      } catch(e) {
-
-      }
+      } catch(e) {}
       return res.status(200).json({def:def})
     }
   })

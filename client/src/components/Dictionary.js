@@ -31,8 +31,19 @@ class Dictionary extends Component {
             onChange={(event) => this.searchHandler(event)}
           />
           <button>Submit</button>
+          <br />
           <p>{this.props.word}</p>
         </form>
+        <button onClick={e => {
+          e.preventDefault();
+          const wordArray = {
+            word: this.state.searchText,
+            definition: this.props.word,
+            repeatedTimes: 0,
+            masterLevel: 1
+          };
+          this.props.addToFavorites(wordArray);
+        }}>Add to Favorites</button>
       </div>
     );
   }
@@ -40,6 +51,7 @@ class Dictionary extends Component {
 
 Dictionary.propTypes = {
   lookUp: PropTypes.func.isRequired,
+  addToFavorites: PropTypes.func,
   word: PropTypes.string
 };
 

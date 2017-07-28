@@ -1,6 +1,7 @@
 import "whatwg-fetch";
 export const PEOPLE_LOADED = "PEOPLE_LOADED";
 export const WORD_LOADED = "WORD_LOADED";
+export const ADDED_TO_FAVORITES = "ADDED_TO_FAVORITES";
 
 export function loadPeople() {
   return function (dispatch) {
@@ -78,19 +79,23 @@ export function deletePerson(id) {
 
 export function lookUp(word) {
   // eslint-disable-next-line
-
   return function (dispatch) {
     console.log("Lookup triggered!", word);
-if(!word ) return false;
+    if (!word ) {return false;}
     fetch("http://localhost:3001/api/" + word, {
       method: "GET",
-
     }).then(res => {
-            console.log(res);
-
+      console.log(res);
       return res.json();
     }).then(data => {
       dispatch(wordLoaded(data));
     }).catch(err => console.log(err));
+  };
+}
+
+export function addToFavorites(array) {
+  return {
+    type: ADDED_TO_FAVORITES,
+    array
   };
 }

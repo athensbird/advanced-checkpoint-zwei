@@ -1,11 +1,16 @@
 import {connect} from "react-redux";
 import Dictionary from "../components/Dictionary";
-import {lookUp} from "../actions";
+import {lookUp, addToFavorites} from "../actions";
 
 function mapDispatchToProps(dispatch) {
-  return {lookUp: (word) => {
-    dispatch(lookUp(word));
-  }};
+  return {
+    lookUp: (word) => {
+      dispatch(lookUp(word));
+    },
+    addToFavorites: (array) => {
+      dispatch(addToFavorites(array));
+    }
+  };
 }
 
 function mapStateToProps(state) {
