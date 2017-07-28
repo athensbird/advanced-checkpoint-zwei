@@ -8,6 +8,12 @@ function mapDispatchToProps(dispatch) {
   }};
 }
 
+function mapStateToProps(state) {
+  return {
+    word: state.word
+  };
+}
+
 export default connect(
-  null, mapDispatchToProps
+  mapStateToProps, mapDispatchToProps
 )(Dictionary);

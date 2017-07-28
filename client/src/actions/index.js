@@ -31,7 +31,7 @@ export function peopleLoaded(people) {
 export function wordLoaded(res) {
   return {
     type: WORD_LOADED,
-    definition: res.results.lexicalEntries.entries.senses.definitions
+    definition: res.def
   };
 }
 
@@ -77,22 +77,20 @@ export function deletePerson(id) {
 }
 
 export function lookUp(word) {
+  // eslint-disable-next-line
+
   return function (dispatch) {
     console.log("Lookup triggered!", word);
-    const myheader = {
-      // eslint-disable-next-line
-      "Accept": "application/json",
-      // eslint-disable-next-line
-      "app_id": "7ebba1c9",
-      // eslint-disable-next-line
-      "app_key": "c5379b69b507e37aef06a8736e88c428",
-      "Access-Control-Allow-Origin": "*",
-    };
-    fetch("https://od-api.oxforddictionaries.com/api/v1/en/entries/en" + word, {
+if(!word ) return false;
+    fetch("http://localhost:3001/api/" + word, {
       method: "GET",
-      headers: myheader
+
     }).then(res => {
-      dispatch(wordLoaded(res));
+            console.log(res);
+
+      return res.json();
+    }).then(data => {
+      dispatch(wordLoaded(data));
     }).catch(err => console.log(err));
   };
 }

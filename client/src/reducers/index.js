@@ -13,6 +13,7 @@ function people(state = [], action) {
 }
 
 function word(state = [], action) {
+  debugger;
   switch (action.type) {
     case WORD_LOADED:
       return action.definition;

@@ -7,7 +7,6 @@ class Dictionary extends Component {
     super(props);
     this.state = {
       searchText: "",
-      definition: ""
     };
   }
   searchHandler(event) {
@@ -18,22 +17,30 @@ class Dictionary extends Component {
   render() {
     return (
       <div>
-        <input
-          className="searchBox"
-          name="Search"
-          type="text"
-          value={this.state.searchText}
-          onChange={(event) => this.searchHandler(event)}
-        />
-        <button onClick={this.props.lookUp(this.state.searchText)}>Submit</button>
-        <p>{this.state.definition}</p>
+        <form onSubmit={e => {
+          e.preventDefault();
+          if (this.props.lookUp) {
+            this.props.lookUp(this.state.searchText);
+          }
+        }}>
+          <input
+            className="searchBox"
+            name="Search"
+            type="text"
+            value={this.state.searchText}
+            onChange={(event) => this.searchHandler(event)}
+          />
+          <button>Submit</button>
+          <p>{this.props.word}</p>
+        </form>
       </div>
     );
   }
 }
 
 Dictionary.propTypes = {
-  lookUp: PropTypes.func.isRequired
+  lookUp: PropTypes.func.isRequired,
+  word: PropTypes.string
 };
 
 export default Dictionary;
