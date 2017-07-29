@@ -6,14 +6,15 @@ import ListOfPersonContainer from "./containers/ListOfPersonContainer";
 import CreatePeopleContainer from "./containers/CreatePeopleContainer";
 import PersonDetailContainer from "./containers/PersonDetailContainer";
 import DictionaryContainer from "./containers/DictionaryContainer";
+import FavoritesContainer from "./containers/FavoritesContainer";
 
 class App extends Component {
   constructor() {
     super();
   }
-  // componentDidMount() {
-  //   this.props.loadPeople();
-  // }
+  componentDidMount() {
+    this.props.loadWordList();
+  }
   render() {
     return (
       <BrowserRouter>
@@ -24,12 +25,15 @@ class App extends Component {
             <Link to="/create">Create a Person</Link>
             <br />
             <Link to="/api">Dictionary</Link>
+            <br />
+            <Link to="favorites">Favorite Words</Link>
           </div>
           <Switch>
             <Route path="/list" exact component={ListOfPersonContainer} />
             <Route path="/create" component={CreatePeopleContainer} />
             <Route path="/list/:id" component={PersonDetailContainer} />
             <Route path="/api" component={DictionaryContainer} />
+            <Route path="/favorites" component={FavoritesContainer} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -43,7 +47,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  loadPeople: PropTypes.func,
+  loadWordList: PropTypes.func,
   people: PropTypes.array
 };
 
