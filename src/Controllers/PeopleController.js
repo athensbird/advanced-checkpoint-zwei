@@ -1,9 +1,9 @@
 // import People from "../Models/PeopleModel";
 const People = require("../Models/PeopleModel");
 
-
 const PeopleController = {
   list: (req, res, next) => {
+    console.log("controller started");
     People.find({}).exec()
       .then(people => {
         console.log(People);

@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const PeopleRoutes = require("./Routes/PeopleRoutes");
+const WordRoutes = require("./Routes/WordRoutes");
 const bodyParser = require("body-parser");
 const request = require("request");
 const proxy = require("http-proxy-middleware");
@@ -9,10 +10,6 @@ const proxy = require("http-proxy-middleware");
 // import mongoose from "mongoose";
 // import PeopleRoutes from "./Routes/PeopleRoutes";
 // import bodyParser from "body-parser";
-// var dp = proxy({
-//         target: "https://od-api.oxforddictionaries.com/api/v1",
-//         changeOrigin: true,
-//     });
 
 const app = express();
 
@@ -40,6 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use(PeopleRoutes);
+app.use(WordRoutes);
 
 app.get('/api/:word', function(req,res){
   //fetch('http://localhost:3001/api/stinky')
@@ -81,15 +79,6 @@ db.once("open", () => {
 });
 
 const port =  3001;
-
-// app.get("/liste", (req, res) => {
-//   People.find({}).exec()
-//     .then(people => {
-//       console.log(People);
-//       return res.json(people);
-//     })
-//     .catch(err => res.json(err));
-// });
 
 app.listen(port, () => {
   console.log(`Listening on port:${port}`);

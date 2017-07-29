@@ -14,6 +14,9 @@ class Dictionary extends Component {
       searchText: event.target.value
     });
   }
+  // componentWillMount() {
+  //   this.props.loadWordList();
+  // }
   render() {
     return (
       <div>
@@ -52,6 +55,7 @@ class Dictionary extends Component {
 Dictionary.propTypes = {
   lookUp: PropTypes.func.isRequired,
   addToFavorites: PropTypes.func,
+  loadWordList: PropTypes.func,
   word: PropTypes.string
 };
 
