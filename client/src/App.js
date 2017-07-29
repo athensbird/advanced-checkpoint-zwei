@@ -22,6 +22,8 @@ class App extends Component {
             <Link to="/list">List</Link>
             <br />
             <Link to="/create">Create a Person</Link>
+            <br />
+            <Link to="/api">Dictionary</Link>
           </div>
           <Switch>
             <Route path="/list" exact component={ListOfPersonContainer} />

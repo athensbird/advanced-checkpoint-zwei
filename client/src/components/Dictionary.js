@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 class Dictionary extends Component {
   constructor(props) {
@@ -55,6 +55,8 @@ class Dictionary extends Component {
             searchText: ""
           });
         }}>Clear</button>
+        <br />
+        <Link to={"/"}>Back</Link>
       </div>
     );
   }

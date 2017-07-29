@@ -62,7 +62,9 @@ app.get('/api/:word', function(req,res){
       var def=''
       try{
         def = body.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0]
-      } catch(e) {}
+      } catch(e) {
+        def = "Sorry, but this word doesn't exist in our database!";
+      }
       return res.status(200).json({def:def})
     }
   })
