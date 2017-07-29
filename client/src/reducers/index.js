@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 import {
   PEOPLE_LOADED, WORD_LOADED, ADDED_TO_FAVORITES,
-  WORD_LIST_LOADED
+  WORD_LIST_LOADED, CLEAR_WORD
 } from "../actions";
 
 function people(state = [], action) {
@@ -16,6 +16,8 @@ function word(state = "", action) {
   switch (action.type) {
     case WORD_LOADED:
       return action.definition;
+    case CLEAR_WORD:
+      return "";
   }
   return state;
 }

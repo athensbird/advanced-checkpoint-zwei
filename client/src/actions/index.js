@@ -3,6 +3,7 @@ export const PEOPLE_LOADED = "PEOPLE_LOADED";
 export const WORD_LOADED = "WORD_LOADED";
 export const ADDED_TO_FAVORITES = "ADDED_TO_FAVORITES";
 export const WORD_LIST_LOADED = "WORD_LIST_LOADED";
+export const CLEAR_WORD = "CLEAR_WORD";
 
 export function loadPeople() {
   return function (dispatch) {
@@ -159,5 +160,11 @@ export function addToFavorites(array) {
     }).catch((err) => {
       console.log(err);
     });
+  };
+}
+
+export function clearWord() {
+  return {
+    type: CLEAR_WORD
   };
 }

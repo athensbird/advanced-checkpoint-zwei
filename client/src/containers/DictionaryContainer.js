@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Dictionary from "../components/Dictionary";
-import {lookUp, addToFavorites, loadWordList} from "../actions";
+import {lookUp, addToFavorites, loadWordList, clearWord} from "../actions";
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -12,6 +12,9 @@ function mapDispatchToProps(dispatch) {
     },
     loadWordList: () => {
       dispatch(loadWordList());
+    },
+    clearWord: () => {
+      dispatch(clearWord());
     }
   };
 }

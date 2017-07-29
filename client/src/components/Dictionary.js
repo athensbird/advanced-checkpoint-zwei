@@ -14,9 +14,10 @@ class Dictionary extends Component {
       searchText: event.target.value
     });
   }
-  // componentWillMount() {
-  //   this.props.loadWordList();
-  // }
+  componentDidMount() {
+    // load the word list every time the component mounts
+    this.props.loadWordList();
+  }
   render() {
     return (
       <div>
@@ -47,6 +48,13 @@ class Dictionary extends Component {
           };
           this.props.addToFavorites(wordArray);
         }}>Add to Favorites</button>
+        <button onClick={e => {
+          e.preventDefault();
+          this.props.clearWord();
+          this.setState({
+            searchText: ""
+          });
+        }}>Clear</button>
       </div>
     );
   }
@@ -56,6 +64,7 @@ Dictionary.propTypes = {
   lookUp: PropTypes.func.isRequired,
   addToFavorites: PropTypes.func,
   loadWordList: PropTypes.func,
+  clearWord: PropTypes.func,
   word: PropTypes.string
 };
 
