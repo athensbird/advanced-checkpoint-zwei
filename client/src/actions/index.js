@@ -168,17 +168,13 @@ export function clearWord() {
 
 export function practice(item) {
   return function (dispatch) {
-    fetch("http://localhost:3001/favorites" + item._id, {
+    fetch("http://localhost:3001/favorites/" + item._id, {
       method: "PUT",
       headers: {"Content-Type": "application/json; charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-        // eslint-disable-next-line
-        "Accept": "application/json "
-      },
+        "Access-Control-Allow-Origin": "*"},
       body: JSON.stringify(item)
-    }).then(res => {
+    }).then(() => {
       dispatch(loadWordList());
-      return res.json();
     }).catch(err => {
       console.log(err);
     });
