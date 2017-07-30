@@ -10,11 +10,12 @@ const WordController = {
       })
       .catch(err => res.json(err));
   },
-  // find: (req, res, next) => {
-  //   Word.findById(req.params.word).exec()
-  //     .then(word => res.json(word))
-  //     .catch(err => res.json(err));
-  // },
+  find: (req, res, next) => {
+    console.log("Started to find the keyword");
+    Word.findById(req.params.id).exec()
+      .then(word => res.json(word))
+      .catch(err => res.json(err));
+  },
   create: (req, res, next) => {
     const word = new Word(req.body);
     word.save()

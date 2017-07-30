@@ -1,7 +1,7 @@
 import App from "./App";
 import "./App.css";
 import { connect } from "react-redux";
-import {loadWordList} from "./actions";
+import {loadWordList, loadPeople} from "./actions";
 
 function mapStateToProps(state) {
   return {
@@ -13,6 +13,9 @@ function mapDispatchToProps(dispatch) {
   return {
     loadWordList: () => {
       dispatch(loadWordList());
+    },
+    loadPeople: () => {
+      dispatch(loadPeople());
     }
   };
 }

@@ -15,29 +15,14 @@ class Favorites extends Component {
       return (
         // eslint-disable-next-line
         <div key={item._id}>
-          <table>
-            <thead>
-              <tr>
-                <th>Word</th>
-                <th>Definiton</th>
-                <th>Repeated Times</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{item.word}</td>
-                <td>{item.definition}</td>
-                <td>{item.repeatedTimes}</td>
-              </tr>
-            </tbody>
-          </table>
+          <li>{item.word}</li>
+          <Link to={"https://localhost:3001/favorites/" + item._id}>Detail Page</Link>
         </div>
       );
     });
     return (
       <div>
         <p>Hallo</p>
-        <displayList list={this.props.wordList} />
         <div>{listOfWords}</div>
         <Link to={"/"}>Back</Link>
       </div>

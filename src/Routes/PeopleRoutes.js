@@ -12,5 +12,6 @@ router.put(ROUTE_ID, PeopleController.update);
 router.delete(ROUTE_ID, PeopleController.delete);
 router.post("/list", PeopleController.create);
 
+
 // export default router;
 module.exports = router;
