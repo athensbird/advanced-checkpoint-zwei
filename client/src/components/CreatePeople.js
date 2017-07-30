@@ -13,13 +13,6 @@ class CreatePeople extends Component {
       created: false
     };
   }
-  //
-  // handleCreate() {
-  //   this.setState({
-  //     created: !this.state.created,
-  //     message: this.state.created ? `Person ${this.state.Name} successfully created!` : ""
-  //   });
-  // }
 
   handleHeimat(event) {
     this.setState({

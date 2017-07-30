@@ -23,12 +23,15 @@ const WordController = {
       .catch(err => res.json(err));
   },
   update: (req, res, next) => {
+    console.log(req.body, req.params.id);
     Word.findById(req.params.id).exec()
     .then(word => {
+      console.log("Before", word.repeatedTimes);
       word.word = req.body.word || word.word;
       word.definition = req.body.definition || word.definition;
       word.repeatedTimes = req.body.repeatedTimes || word.repeatedTimes;
       word.masterLevel = req.body.masterLevel || word.masterLevel;
+      console.log("After", word.repeatedTimes);
       word.save();
     })
     .then(word => res.json(word))

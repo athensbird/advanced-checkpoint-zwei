@@ -118,13 +118,11 @@ export function deletePerson(id) {
 export function lookUp(word) {
   // eslint-disable-next-line
   return function (dispatch) {
-    console.log("Lookup triggered!", word);
     if (!word ) {return false;}
     // fetch node server at port 3001
     fetch("http://localhost:3001/api/" + word, {
       method: "GET",
     }).then(res => {
-      console.log(res);
       return res.json();
     }).then(data => {
       dispatch(wordLoaded(data));
@@ -167,6 +165,7 @@ export function clearWord() {
 }
 
 export function practice(item) {
+  console.log("practice passed", item);
   return function (dispatch) {
     fetch("http://localhost:3001/favorites/" + item._id, {
       method: "PUT",

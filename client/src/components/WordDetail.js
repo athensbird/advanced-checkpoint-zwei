@@ -6,8 +6,15 @@ class WordDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deleted: false
+      deleted: false,
+      repeatedTimes: 1
     };
+  }
+  handleRepeats() {
+    console.log("Repeat Handler Triggered!");
+    this.setState({
+      repeatedTimes: this.state.repeatedTimes + 1
+    });
   }
   render() {
     const wordId = this.props.match.params.id;
@@ -41,7 +48,11 @@ class WordDetail extends Component {
             <br />
             <button onClick={e => {
               e.preventDefault();
-              this.props.practice(item);
+              this.setState({
+                repeatedTimes: this.state.repeatedTimes + 1
+              });
+              const newState = Object.assign(item, {repeatedTimes: this.state.repeatedTimes});
+              this.props.practice(newState);
             }}>Practice</button>
             <button onClick={e => {
               this.props.deleteWord(e, item);
