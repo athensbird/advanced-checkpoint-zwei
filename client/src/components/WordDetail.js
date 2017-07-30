@@ -1,9 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
-//eslint-disable-next-line
+function practice(e, item) {
+  e.preventDefault();
+  this.props.practice(item);
+}
+
 function WordDetail(props) {
-  const {item} = props;
+  const wordId = props.match.params.id;
+  // eslint-disable-next-line
+  const item = props.wordList.find(w => w._id == wordId) || [];
   return (
     <div key={item._id}>
       <table>
@@ -22,12 +29,22 @@ function WordDetail(props) {
           </tr>
         </tbody>
       </table>
+      <br />
+      <button onClick={e => practice(e, item)}>Practice</button>
+      <button onClick={e => props.deleteWord(e, item)}>Delete</button>
+      <br />
+      <Link to={"/favorites/"}>Back to List</Link>
+      <br />
+      <Link to={"/"}>Back to Homepage</Link>
     </div>
   );
 }
 
 WordDetail.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  match: PropTypes.object,
+  wordList: PropTypes.array,
+  deleteWord: PropTypes.func
 };
 
 export default WordDetail;

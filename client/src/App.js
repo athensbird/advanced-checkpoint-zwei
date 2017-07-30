@@ -35,7 +35,7 @@ class App extends Component {
             <Route path="/create" component={CreatePeopleContainer} />
             <Route path="/list/:id" component={PersonDetailContainer} />
             <Route path="/api" component={DictionaryContainer} />
-            <Route path="/favorites" component={FavoritesContainer} />
+            <Route path="/favorites" exact component={FavoritesContainer} />
             <Route path="/favorites/:id" component={WordDetailContainer} />
           </Switch>
         </div>

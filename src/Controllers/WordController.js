@@ -21,6 +21,28 @@ const WordController = {
     word.save()
       .then(savedWord => res.json(savedWord))
       .catch(err => res.json(err));
+  },
+  update: (req, res, next) => {
+    console.log("update started!");
+    Word.findById(req.params.id).exec()
+    .then(word => {
+      console.log("Before", word.masterLevel);
+      console.log(req.body);
+      word.word = req.body.word || word.word;
+      word.definition = req.body.definition || word.definition;
+      word.repeatedTimes = req.body.repeatedTimes || word.repeatedTimes;
+      word.masterLevel = req.body.masterLevel || word.masterLevel;
+      console.log("After", word.masterLevel);
+      word.save();
+    })
+    .then(word => res.json(word))
+    .catch(err => res.json(err));
+  },
+  delete: (req, res, next) => {
+    console.log("delete started!");
+    Word.findByIdAndRemove(req.params.id).exec()
+    .then(() => res.json("Word Deleted!"))
+    .catch(err => res.json(err));
   }
 }
 

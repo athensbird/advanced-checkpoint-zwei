@@ -16,7 +16,7 @@ class Favorites extends Component {
         // eslint-disable-next-line
         <div key={item._id}>
           <li>{item.word}</li>
-          <Link to={"https://localhost:3001/favorites/" + item._id}>Detail Page</Link>
+          <Link to={"/favorites/" + item._id}>Detail Page</Link>
         </div>
       );
     });

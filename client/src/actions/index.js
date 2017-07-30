@@ -85,14 +85,11 @@ export function peopleLoadedError(err) {
 }
 
 export function createPerson(person) {
-  console.log(person);
   return function (dispatch) {
     fetch("http://localhost:3001/list", {
       method: "POST",
       headers: {"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
-        // eslint-disable-next-line
-        "Accept": "application/json "
       },
       mode: "cors",
       cache: "default",
@@ -166,5 +163,35 @@ export function addToFavorites(array) {
 export function clearWord() {
   return {
     type: CLEAR_WORD
+  };
+}
+
+export function practice(item) {
+  return function (dispatch) {
+    fetch("http://localhost:3001/favorites" + item._id, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        // eslint-disable-next-line
+        "Accept": "application/json "
+      },
+      body: JSON.stringify(item)
+    }).then(res => {
+      dispatch(loadWordList());
+      return res.json();
+    }).catch(err => {
+      console.log(err);
+    });
+  };
+}
+
+export function deleteWord(item) {
+  return function (dispatch) {
+    fetch("http://localhost:3001/favorites/" + item._id, {
+      method: "DELETE",
+      headers: {"Content-Type": "application/json"}
+    }).then(() => {
+      dispatch(loadWordList());
+    });
   };
 }
