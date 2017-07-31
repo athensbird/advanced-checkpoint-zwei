@@ -2,11 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const PeopleRoutes = require("./Routes/PeopleRoutes");
 const WordRoutes = require("./Routes/WordRoutes");
+const UserRoutes = require("./Routes/UserRoutes");
 const bodyParser = require("body-parser");
 const request = require("request");
 const proxy = require("http-proxy-middleware");
 // const People = require("./Models/PeopleModel");
-
 // import mongoose from "mongoose";
 // import PeopleRoutes from "./Routes/PeopleRoutes";
 // import bodyParser from "body-parser";
@@ -23,8 +23,6 @@ const myheader = {
   "Access-Control-Allow-Origin": "*",
 };
 
-
-
 // always put bodyparser before customized middlewares
 app.use(bodyParser.json());
 
@@ -36,8 +34,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(UserRoutes);
 app.use(PeopleRoutes);
 app.use(WordRoutes);
+
 
 app.get('/api/:word', function(req,res){
   //fetch('http://localhost:3001/api/stinky')

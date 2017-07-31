@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 import {
   PEOPLE_LOADED, WORD_LOADED, ADDED_TO_FAVORITES,
-  WORD_LIST_LOADED, CLEAR_WORD
+  WORD_LIST_LOADED, CLEAR_WORD, USER_LOADED
 } from "../actions";
 
 function people(state = [], action) {
@@ -32,9 +32,18 @@ function wordList(state = [], action) {
   return state;
 }
 
+function user(state = [], action) {
+  switch (action.type) {
+    case USER_LOADED:
+      return action.currentUser;
+  }
+  return state;
+}
+
 const rootReducer = combineReducers({
   people,
   word,
-  wordList
+  wordList,
+  user
 });
 export default rootReducer;

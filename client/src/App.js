@@ -8,6 +8,8 @@ import PersonDetailContainer from "./containers/PersonDetailContainer";
 import DictionaryContainer from "./containers/DictionaryContainer";
 import FavoritesContainer from "./containers/FavoritesContainer";
 import WordDetailContainer from "./containers/WordDetailContainer";
+import FlashcardContainer from "./containers/FlashcardContainer";
+import UserContainer from "./containers/UserContainer";
 
 class App extends Component {
   constructor() {
@@ -28,7 +30,9 @@ class App extends Component {
             <br />
             <Link to="/api">Dictionary</Link>
             <br />
-            <Link to="favorites">Favorite Words</Link>
+            <Link to="/favorites">Favorite Words</Link>
+            <br />
+            <Link to="flashcard">Flashcards</Link>
           </div>
           <Switch>
             <Route path="/list" exact component={ListOfPersonContainer} />
@@ -37,6 +41,8 @@ class App extends Component {
             <Route path="/api" component={DictionaryContainer} />
             <Route path="/favorites" exact component={FavoritesContainer} />
             <Route path="/favorites/:id" component={WordDetailContainer} />
+            <Route path="/flashcard" exact component={FlashcardContainer} />
+            <Route path="/user" exact component={UserContainer} />
           </Switch>
         </div>
       </BrowserRouter>

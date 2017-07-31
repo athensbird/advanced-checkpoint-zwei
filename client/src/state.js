@@ -16,5 +16,6 @@ export default {
     }
   ],
   word: null,
-  wordList: []
+  wordList: [],
+  user: []
 };

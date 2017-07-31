@@ -1,6 +1,7 @@
 import "whatwg-fetch";
 export const PEOPLE_LOADED = "PEOPLE_LOADED";
 export const WORD_LOADED = "WORD_LOADED";
+export const USER_LOADED = "USER_LOADED";
 export const ADDED_TO_FAVORITES = "ADDED_TO_FAVORITES";
 export const WORD_LIST_LOADED = "WORD_LIST_LOADED";
 export const CLEAR_WORD = "CLEAR_WORD";
@@ -31,31 +32,38 @@ export function peopleLoaded(people) {
   };
 }
 
-// export function loadWord() {
-//   return function (dispatch) {
-//     fetch("http://localhost:5000/api")
-//     // eslint-disable-next-line
-//     .then((res, next) => {
-//       return res.json();
-//     })
-//     .then(word => {
-//       dispatch(wordLoaded(word));
-//       return;
-//     }).catch(err => {
-//       console.log(err);
-//     });
-//   };
-// }
+export function userLoaded(currentUser) {
+  console.log("User loaded!");
+  return {
+    type: USER_LOADED,
+    currentUser
+  };
+}
+
+export function loadUser() {
+   console.log("Started to load users!");
+   return function (dispatch) {
+     fetch("http://localhost:3001/user")
+     .then((res, next) => {
+       return res.json();
+     }).then(res => {
+       dispatch(userLoaded(res));
+     }).catch(err => {
+       console.log(err);
+     });
+   };
+}
 
 export function loadWordList() {
+  console.log("Started to load word list!");
   return function (dispatch) {
     fetch("http://localhost:3001/api")
     // eslint-disable-next-line
     .then((res, next) => {
-      console.log(res);
       return res.json();
     }).then(res => {
       dispatch(wordListLoaded(res));
+      console.log("wordlist loaded!");
       return;
     }).catch(err => {
       console.log(err);
