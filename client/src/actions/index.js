@@ -41,17 +41,18 @@ export function userLoaded(currentUser) {
 }
 
 export function loadUser() {
-   console.log("Started to load users!");
-   return function (dispatch) {
-     fetch("http://localhost:3001/user")
-     .then((res, next) => {
-       return res.json();
-     }).then(res => {
-       dispatch(userLoaded(res));
-     }).catch(err => {
-       console.log(err);
-     });
-   };
+  console.log("Started to load users!");
+  return function (dispatch) {
+    fetch("http://localhost:3001/user")
+    // eslint-disable-next-line
+    .then((res, next) => {
+      return res.json();
+    }).then(res => {
+      dispatch(userLoaded(res));
+    }).catch(err => {
+      console.log(err);
+    });
+  };
 }
 
 export function loadWordList() {

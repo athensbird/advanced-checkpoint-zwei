@@ -38,7 +38,6 @@ app.use(UserRoutes);
 app.use(PeopleRoutes);
 app.use(WordRoutes);
 
-
 app.get('/api/:word', function(req,res){
   //fetch('http://localhost:3001/api/stinky')
   var word = req.params.word
