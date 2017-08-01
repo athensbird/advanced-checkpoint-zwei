@@ -12,7 +12,7 @@ class DetailGameView extends Component {
       <div>
         {this.props.index}
         {cardInPlay ?
-          <div>cardInPlay exists!</div> :
+          <h2>Definition: {cardInPlay.definition}</h2> :
         null}
       </div>
     );

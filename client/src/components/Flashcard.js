@@ -21,6 +21,7 @@ class Flashcard extends Component {
     this.setState({
       randomNum: Math.floor(Math.random() * this.props.wordList.length)
     });
+    console.log("index generated!");
   }
   toggleGame(e) {
     // always prevent default events lest an infinite loop stacks over
@@ -41,9 +42,10 @@ class Flashcard extends Component {
             <button
               onClick={e => this.getRandomInt(e)}
             >Generate Word</button>
-            {this.state.randomNum ? <DetailGameView
-              index={this.state.randomNum}
-              wordList={this.props.wordList}
+            {this.state.randomNum || this.state.randomNum === 0 ?
+              <DetailGameView
+                index={this.state.randomNum}
+                wordList={this.props.wordList}
               /> : null}
           </div> :
         null}
