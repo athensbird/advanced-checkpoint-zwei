@@ -71,6 +71,19 @@ export function loadWordList() {
     });
   };
 }
+export function updateUsername(username) {
+  return function (dispatch) {
+    fetch("http://localhost:3001/user/", {
+      method: "PUT",
+      headers: {"Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*"},
+      mode: "cors",
+      body: JSON.stringify(username)
+    }).then(() => {
+      dispatch(loadUser());
+    });
+  };
+}
 
 export function wordLoaded(res) {
   return {

@@ -5,7 +5,6 @@ const WordRoutes = require("./Routes/WordRoutes");
 const UserRoutes = require("./Routes/UserRoutes");
 const bodyParser = require("body-parser");
 const request = require("request");
-const proxy = require("http-proxy-middleware");
 // const People = require("./Models/PeopleModel");
 // import mongoose from "mongoose";
 // import PeopleRoutes from "./Routes/PeopleRoutes";

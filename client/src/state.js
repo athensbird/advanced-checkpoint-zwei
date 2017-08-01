@@ -17,9 +17,5 @@ export default {
   ],
   word: null,
   wordList: [],
-  user: {
-    username: "manuel0618",
-    level: 1,
-    gamesPlayed: 0
-  }
+  user: {}
 };

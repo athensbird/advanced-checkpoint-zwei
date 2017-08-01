@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import UserDetail from "../components/UserDetail";
-import {loadUser} from "../actions";
+import {loadUser, updateUsername} from "../actions";
 
 function mapStateToProps(state) {
   return {
@@ -12,6 +12,10 @@ function mapDispatchToProps(dispatch) {
   return {
     loadUser: () => {
       dispatch(loadUser());
+    },
+    handleUsername: (e) => {
+      e.preventDefault();
+      dispatch(updateUsername(e.target.value));
     }
   };
 }

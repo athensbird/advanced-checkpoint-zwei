@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get("/user", UserController.list);
 router.put("/user", UserController.update);
+router.post("/user", UserController.create);
 
 // export default router;
 module.exports = router;
