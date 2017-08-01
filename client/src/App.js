@@ -32,7 +32,9 @@ class App extends Component {
             <br />
             <Link to="/favorites">Favorite Words</Link>
             <br />
-            <Link to="flashcard">Flashcards</Link>
+            <Link to="/flashcard">Flashcards</Link>
+            <br />
+            <Link to="/user">User Info</Link>
           </div>
           <Switch>
             <Route path="/list" exact component={ListOfPersonContainer} />
