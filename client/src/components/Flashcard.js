@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import DetailGameView from "./DetailGameView";
-// import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 class Flashcard extends Component {
   constructor(props) {
@@ -21,7 +21,9 @@ class Flashcard extends Component {
     this.setState({
       randomNum: Math.floor(Math.random() * this.props.wordList.length)
     });
-    console.log("index generated!");
+  }
+  proveGuessText(guessText) {
+    console.log("Prove", guessText);
   }
   toggleGame(e) {
     // always prevent default events lest an infinite loop stacks over
@@ -46,9 +48,14 @@ class Flashcard extends Component {
               <DetailGameView
                 index={this.state.randomNum}
                 wordList={this.props.wordList}
+                handleGuessText={
+                  (guessText) =>
+                  this.proveGuessText(guessText)
+                }
               /> : null}
           </div> :
         null}
+        <Link to="/">Back</Link>
       </div>
     );
   }

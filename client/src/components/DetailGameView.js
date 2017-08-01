@@ -4,16 +4,55 @@ import PropTypes from "prop-types";
 class DetailGameView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      guessText: "",
+      attempt: null
+    };
+  }
+  storeGuessText(e) {
+    this.setState({
+      guessText: e.target.value
+    });
+  }
+  handleGuessText(e) {
+    e.preventDefault();
+    const {index} = this.props;
+    if (this.state.guessText === this.props.wordList[index].word) {
+      console.log("correct!");
+      this.setState({
+        attempt: true
+      });
+    } else {
+      console.log("Try again!");
+      this.setState({
+        attempt: false
+      });
+    }
+    this.props.handleGuessText(this.state.guessText);
   }
   render() {
     const {index} = this.props;
     const cardInPlay = this.props.wordList[index];
     return (
       <div>
-        {this.props.index}
-        {cardInPlay ?
-          <h2>Definition: {cardInPlay.definition}</h2> :
-        null}
+        <form onSubmit={e => this.handleGuessText(e)}>
+          {cardInPlay ?
+            <h2>Definition: {cardInPlay.definition}</h2> :
+          null}
+          <br />
+          <input
+            onChange={this.storeGuessText.bind(this)}
+            placeholder="Please enter the word"
+          />
+          {this.state.attempt === true ?
+            <h3>Congratulations, you are correct!</h3> :
+            null
+          }
+          {this.state.attempt === false ?
+            <h3>That is wrong, try again!</h3> :
+            null
+          }
+        </form>
       </div>
     );
   }
@@ -21,7 +60,8 @@ class DetailGameView extends Component {
 
 DetailGameView.propTypes = {
   index: PropTypes.number,
-  wordList: PropTypes.array
+  wordList: PropTypes.array,
+  handleGuessText: PropTypes.func
 };
 
 export default DetailGameView;
