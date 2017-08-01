@@ -19,7 +19,8 @@ const UserController = {
       .then(savedUser => res.json(savedUser));
   },
   update: (req, res, next) => {
-    User.findById(userId).exec()
+    console.log(req.body);
+    User.findById("597f42ea6e21bd2061cac926").exec()
       .then(user => {
         user.username = req.body.username || user.username;
         user.level = req.body.level || user.level;

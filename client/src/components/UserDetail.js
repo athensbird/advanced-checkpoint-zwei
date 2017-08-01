@@ -13,10 +13,11 @@ class UserDetail extends Component {
   componentWillMount() {
     this.props.loadUser();
   }
-  handleUserLoaded() {
-    this.setState({
-      loading: false
-    });
+  registerUsername(un) {
+    const usernameObject = {username: un};
+    if (this.props.handleUpperUsername) {
+      this.props.handleUpperUsername(usernameObject);
+    }
   }
   render() {
     // eslint-disable-next-line
@@ -24,7 +25,10 @@ class UserDetail extends Component {
     return (
       <div>
         {currentUser ? <p>Status:Ready </p> : <p>Status:Processing </p>}
-        {currentUser ? <DetailDisplay user={currentUser} /> :
+        {currentUser ? <DetailDisplay
+          user={currentUser}
+          handleUsername={(username) => this.registerUsername(username)}
+           /> :
         <p>Loading the data, please wait...</p>}
       </div>
     );
@@ -46,7 +50,7 @@ UserDetail.propTypes = {
   level: PropTypes.number,
   gamesPlayed: PropTypes.number,
   loadUser: PropTypes.func,
-  handleUsername: PropTypes.func
+  handleUpperUsername: PropTypes.func
 };
 
 export default UserDetail;

@@ -13,9 +13,8 @@ function mapDispatchToProps(dispatch) {
     loadUser: () => {
       dispatch(loadUser());
     },
-    handleUsername: (e) => {
-      e.preventDefault();
-      dispatch(updateUsername(e.target.value));
+    handleUpperUsername: (username) => {
+      dispatch(updateUsername(username));
     }
   };
 }
