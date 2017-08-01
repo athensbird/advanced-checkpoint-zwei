@@ -22,8 +22,9 @@ class Flashcard extends Component {
       randomNum: Math.floor(Math.random() * this.props.wordList.length)
     });
   }
-  proveGuessText(guessText) {
-    console.log("Prove", guessText);
+  proveGuessText(word) {
+    console.log("Prove", word);
+    this.props.practice(word);
   }
   toggleGame(e) {
     // always prevent default events lest an infinite loop stacks over
@@ -49,12 +50,13 @@ class Flashcard extends Component {
                 index={this.state.randomNum}
                 wordList={this.props.wordList}
                 handleGuessText={
-                  (guessText) =>
-                  this.proveGuessText(guessText)
+                  (word) =>
+                  this.proveGuessText(word)
                 }
               /> : null}
           </div> :
         null}
+        <br />
         <Link to="/">Back</Link>
       </div>
     );
@@ -131,7 +133,8 @@ class Flashcard extends Component {
 
 Flashcard.propTypes = {
   wordList: PropTypes.array,
-  loadWordList: PropTypes.func
+  loadWordList: PropTypes.func,
+  practice: PropTypes.func
 };
 
 export default Flashcard;

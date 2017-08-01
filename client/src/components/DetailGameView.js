@@ -6,7 +6,11 @@ class DetailGameView extends Component {
     super(props);
     this.state = {
       guessText: "",
-      attempt: null
+      attempt: null,
+      wordChange: {
+        masterLevel: 0,
+        repeatedTimes: 0
+      }
     };
   }
   storeGuessText(e) {
@@ -18,17 +22,26 @@ class DetailGameView extends Component {
     e.preventDefault();
     const {index} = this.props;
     if (this.state.guessText === this.props.wordList[index].word) {
-      console.log("correct!");
       this.setState({
-        attempt: true
+        attempt: true,
+        wordChange: {
+          masterLevel: this.props.wordList[index].masterLevel + 1,
+          repeatedTimes: this.props.wordList[index].repeatedTimes + 1
+        }
       });
     } else {
-      console.log("Try again!");
       this.setState({
-        attempt: false
+        attempt: false,
+        wordChange: {
+          repeatedTimes: this.props.wordList[index].repeatedTimes + 1
+        }
       });
     }
-    this.props.handleGuessText(this.state.guessText);
+    const holder = Object.assign(
+      {}, this.props.wordList[index], 
+      this.state.wordChange
+    );
+    this.props.handleGuessText(holder);
   }
   render() {
     const {index} = this.props;
