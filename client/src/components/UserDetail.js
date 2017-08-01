@@ -13,10 +13,9 @@ class UserDetail extends Component {
   componentWillMount() {
     this.props.loadUser();
   }
-  registerUsername(un) {
-    const usernameObject = {username: un};
+  registerUsername(username) {
     if (this.props.handleUpperUsername) {
-      this.props.handleUpperUsername(usernameObject);
+      this.props.handleUpperUsername(username);
     }
   }
   render() {
