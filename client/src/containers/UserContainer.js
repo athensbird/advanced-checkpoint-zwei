@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import UserDetail from "../components/UserDetail";
-import {loadUser, updateUsername} from "../actions";
+import {loadUser, updateUser} from "../actions";
 
 function mapStateToProps(state) {
   return {
@@ -14,7 +14,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(loadUser());
     },
     handleUpperUsername: (username) => {
-      dispatch(updateUsername(username));
+      dispatch(updateUser(username));
     }
   };
 }

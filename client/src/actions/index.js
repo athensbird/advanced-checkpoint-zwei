@@ -72,14 +72,14 @@ export function loadWordList() {
   };
 }
 
-export function updateUsername(username) {
+export function updateUser(payload) {
   return function (dispatch) {
     fetch("http://localhost:3001/user/", {
       method: "PUT",
       headers: {"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*"},
       mode: "cors",
-      body: JSON.stringify(username)
+      body: JSON.stringify(payload)
     }).then(() => {
       dispatch(loadUser());
     });

@@ -1,10 +1,11 @@
 import {connect} from "react-redux";
 import Flashcard from "../components/Flashcard";
-import {loadWordList, practice} from "../actions";
+import {loadWordList, loadUser, practice, updateUser} from "../actions";
 
 function mapStateToProps(state) {
   return {
-    wordList: state.wordList
+    wordList: state.wordList,
+    user: state.user
   };
 }
 
@@ -13,8 +14,14 @@ function mapDispatchToProps(dispatch) {
     loadWordList: () => {
       dispatch(loadWordList());
     },
+    loadUser: () => {
+      dispatch(loadUser());
+    },
     practice: (word) => {
       dispatch(practice(word));
+    },
+    updateUser: (payload) => {
+      dispatch(updateUser(payload));
     }
   };
 }

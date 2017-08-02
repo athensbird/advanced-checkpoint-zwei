@@ -10,11 +10,15 @@ class Flashcard extends Component {
       gameOn: false,
       nextCard: false,
       randomNum: null,
-      guessText: ""
+      guessText: "",
+      userChange: {
+        gamesPlayed: null
+      }
     };
   }
   componentDidMount() {
     this.props.loadWordList();
+    this.props.loadUser();
   }
   getRandomInt(e) {
     e.preventDefault();
@@ -23,15 +27,25 @@ class Flashcard extends Component {
     });
   }
   proveGuessText(word) {
-    console.log("Prove", word);
     this.props.practice(word);
   }
   toggleGame(e) {
     // always prevent default events lest an infinite loop stacks over
     e.preventDefault();
+    const user = this.props.user[0];
+    const gamesPlayedBefore = user.gamesPlayed;
     this.setState({
-      gameOn: !this.state.gameOn
-    });
+      gameOn: !this.state.gameOn,
+      userChange: {
+        gamesPlayed: this.state.gameOn ? gamesPlayedBefore + 1 : null
+      }}, () => this.passUserToRedux(this.state.userChange));
+  }
+  passUserToRedux(changedUser) {
+    const holder = Object.assign(
+      {}, this.props.user[0],
+      changedUser
+    );
+    this.props.updateUser(holder);
   }
   render() {
     return (
@@ -133,7 +147,13 @@ class Flashcard extends Component {
 
 Flashcard.propTypes = {
   wordList: PropTypes.array,
+  user: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]),
   loadWordList: PropTypes.func,
+  loadUser: PropTypes.func,
+  updateUser: PropTypes.func,
   practice: PropTypes.func
 };
 
