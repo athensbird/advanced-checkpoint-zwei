@@ -30,26 +30,26 @@ class DetailGameView extends Component {
           repeatedTimes: card.repeatedTimes + 1
         }
         // async callback function to pass the object to upper level
-      }, () => this.passWordToRedux(index));
+      }, () => this.passWordToRedux(index, this.state.attempt));
     } else {
       this.setState({
         attempt: false,
         wordChange: {
           repeatedTimes: card.repeatedTimes + 1
         }
-      }, () => this.passWordToRedux(index));
+      }, () => this.passWordToRedux(index, this.state.attempt));
     }
   }
-  passWordToRedux(index) {
+  passWordToRedux(index, attempt) {
     const holder = Object.assign(
       {}, this.props.wordList[index],
       this.state.wordChange
     );
-    this.props.handleGuessText(holder);
+    this.props.handleGuessText(holder, attempt);
   }
   render() {
     // eslint-disable-next-line
-    const {index, nextCard} = this.props;
+    const {index, nextCard, life} = this.props;
     const cardInPlay = this.props.wordList[index];
     return (
       <div>
@@ -65,6 +65,7 @@ class DetailGameView extends Component {
               placeholder="Please enter the word"
             />
           }
+          <div>{life}</div>
           <div>
             {this.state.attempt && nextCard ?
               <h3>Congratulations, you are correct!</h3> :

@@ -12,7 +12,8 @@ class Flashcard extends Component {
       randomNum: null,
       userChange: {
         gamesPlayed: null
-      }
+      },
+      life: 15
     };
   }
   componentDidMount() {
@@ -23,14 +24,36 @@ class Flashcard extends Component {
     e.preventDefault();
     if (!this.state.nextCard) {
       console.log("Sorry, please submit a value!");
+    } else {
+      this.setState({
+        randomNum: Math.floor(Math.random() * this.props.wordList.length),
+        nextCard: false
+      });
     }
-    this.setState({
-      randomNum: Math.floor(Math.random() * this.props.wordList.length),
-      nextCard: false
-    });
   }
-  proveGuessText(word) {
+  handleLife(attempt) {
+    const currentLife = this.state.life;
+    if (attempt) {
+      this.setState({
+        life: currentLife + 2
+      }, () => this.determineLose());
+    } else {
+      this.setState({
+        life: currentLife - 5
+      }, () => this.determineLose());
+    }
+  }
+  determineLose() {
+    if (this.state.life <= 0 ) {
+      this.setState({
+        gameOn: false
+      });
+      console.log("You lost!");
+    }
+  }
+  proveGuessText(word, attempt) {
     this.props.practice(word);
+    this.handleLife(attempt);
     // on each child onSubmit() event, toggle the nextCard state
     this.setState({
       nextCard: true
@@ -68,9 +91,10 @@ class Flashcard extends Component {
                 index={this.state.randomNum}
                 wordList={this.props.wordList}
                 nextCard={this.state.nextCard}
+                life={this.state.life}
                 handleGuessText={
-                  (word) =>
-                  this.proveGuessText(word)
+                  (word, attempt) =>
+                  this.proveGuessText(word, attempt)
                 }
               /> : null}
             <button
