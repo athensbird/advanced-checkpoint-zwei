@@ -21,14 +21,28 @@ class Flashcard extends Component {
     this.props.loadWordList();
     this.props.loadUser();
   }
+  getRandomInt() {
+    console.log("getRandomInt triggered");
+    this.setState({
+      randomNum: Math.floor(Math.random() * this.props.wordList.length),
+    });
+  }
   resetGame(e) {
     e.preventDefault();
+    // debugger;
+    const currentRN = this.state.randomNum;
     if (!this.state.nextCard) {
       console.log("Sorry, please submit a value!");
     } else {
       this.setState({
         randomNum: Math.floor(Math.random() * this.props.wordList.length),
         nextCard: false
+      }, () => {
+        if (currentRN === this.state.randomNum) {
+          this.getRandomInt();
+        } else {
+          return;
+        }
       });
     }
   }
