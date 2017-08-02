@@ -21,24 +21,29 @@ class DetailGameView extends Component {
   handleGuessText(e) {
     e.preventDefault();
     const {index} = this.props;
-    if (this.state.guessText === this.props.wordList[index].word) {
+    // eslint-disable-next-line
+    const card = this.props.wordList[index];
+    if (this.state.guessText === card.word) {
       this.setState({
         attempt: true,
         wordChange: {
-          masterLevel: this.props.wordList[index].masterLevel + 1,
-          repeatedTimes: this.props.wordList[index].repeatedTimes + 1
+          masterLevel: card.masterLevel + 1,
+          repeatedTimes: card.repeatedTimes + 1
         }
-      });
+        // async callback function to pass the object to upper level
+      }, () => this.passWordToRedux(index));
     } else {
       this.setState({
         attempt: false,
         wordChange: {
-          repeatedTimes: this.props.wordList[index].repeatedTimes + 1
+          repeatedTimes: card.repeatedTimes + 1
         }
-      });
+      }, () => this.passWordToRedux(index));
     }
+  }
+  passWordToRedux(index) {
     const holder = Object.assign(
-      {}, this.props.wordList[index], 
+      {}, this.props.wordList[index],
       this.state.wordChange
     );
     this.props.handleGuessText(holder);

@@ -35,6 +35,7 @@ class WordDetail extends Component {
                   <th>Word</th>
                   <th>Definiton</th>
                   <th>Repeated Times</th>
+                  <th>Master Level</th>
                 </tr>
               </thead>
               <tbody>
@@ -42,6 +43,7 @@ class WordDetail extends Component {
                   <td>{item.word}</td>
                   <td>{item.definition}</td>
                   <td>{item.repeatedTimes}</td>
+                  <td>{item.masterLevel}</td>
                 </tr>
               </tbody>
             </table>
