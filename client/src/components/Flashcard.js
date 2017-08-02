@@ -8,9 +8,8 @@ class Flashcard extends Component {
     super(props);
     this.state = {
       gameOn: false,
-      nextCard: false,
+      nextCard: true,
       randomNum: null,
-      guessText: "",
       userChange: {
         gamesPlayed: null
       }
@@ -20,14 +19,22 @@ class Flashcard extends Component {
     this.props.loadWordList();
     this.props.loadUser();
   }
-  getRandomInt(e) {
+  resetGame(e) {
     e.preventDefault();
+    if (!this.state.nextCard) {
+      console.log("Sorry, please submit a value!");
+    }
     this.setState({
-      randomNum: Math.floor(Math.random() * this.props.wordList.length)
+      randomNum: Math.floor(Math.random() * this.props.wordList.length),
+      nextCard: false
     });
   }
   proveGuessText(word) {
     this.props.practice(word);
+    // on each child onSubmit() event, toggle the nextCard state
+    this.setState({
+      nextCard: true
+    });
   }
   toggleGame(e) {
     // always prevent default events lest an infinite loop stacks over
@@ -56,18 +63,20 @@ class Flashcard extends Component {
         </button>
         {this.state.gameOn ?
           <div>
-            <button
-              onClick={e => this.getRandomInt(e)}
-            >Generate Word</button>
             {this.state.randomNum || this.state.randomNum === 0 ?
               <DetailGameView
                 index={this.state.randomNum}
                 wordList={this.props.wordList}
+                nextCard={this.state.nextCard}
                 handleGuessText={
                   (word) =>
                   this.proveGuessText(word)
                 }
               /> : null}
+            <button
+              // this function should reset all the sub states
+              onClick={e => this.resetGame(e)}
+            >Next Word</button>
           </div> :
         null}
         <br />
@@ -76,74 +85,6 @@ class Flashcard extends Component {
     );
   }
 }
-
-// class Flashcard extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       gameOn: false,
-//       nextCard: false,
-//       guessText: "",
-//       randomInt: null
-//     };
-//     if (this.state.nextCard) {
-//       //
-//     }
-//   }
-//   componentWillMount() {
-//     this.props.loadWordList();
-//   }
-//   guessHandler(e) {
-//     this.setState({
-//       guessText: e.target.value
-//     });
-//   }
-//   handleForm(e, key) {
-//     e.preventDefault();
-//     if (this.state.searchText === key) {
-//       this.setState({
-//         nextCard: true
-//       });
-//     }
-//   }
-//   getRandomInt() {
-//     return Math.floor(Math.random() * this.props.wordList.length);
-//   }
-//   toggleGame() {
-//     this.setState({
-//       gameOn: !this.state.gameOn
-//     });
-//   }
-//   render() {
-//     debugger;
-//     const {gameOn} = this.state;
-//     const cardIndex = this.getRandomInt();
-//     const cardInPlay = this.props.wordList[cardIndex];
-//     // const key = cardInPlay.word;
-//     const key = "athens";
-//     return (
-//       <div>
-//         <div>
-//           <button>Start a game</button>
-//         </div>
-//         {gameOn ?
-//           <div>
-//           /* <h2>{cardInPlay.definition}</h2> */
-//             <form onSubmit={e => this.handleForm(e, key)}>
-//               <input
-//                 className="guessBox"
-//                 type="text"
-//                 value={this.state.guessBox}
-//                 onChange={e => this.guessHandler(e)}
-//                 />
-//             </form>
-//           </div> : null}
-//         <br />
-//         <Link to={"/"}>Back</Link>
-//       </div>
-//     );
-//   }
-// }
 
 Flashcard.propTypes = {
   wordList: PropTypes.array,
@@ -158,3 +99,73 @@ Flashcard.propTypes = {
 };
 
 export default Flashcard;
+
+/*
+class Flashcard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gameOn: false,
+      nextCard: false,
+      guessText: "",
+      randomInt: null
+    };
+    if (this.state.nextCard) {
+      //
+    }
+  }
+  componentWillMount() {
+    this.props.loadWordList();
+  }
+  guessHandler(e) {
+    this.setState({
+      guessText: e.target.value
+    });
+  }
+  handleForm(e, key) {
+    e.preventDefault();
+    if (this.state.searchText === key) {
+      this.setState({
+        nextCard: true
+      });
+    }
+  }
+  getRandomInt() {
+    return Math.floor(Math.random() * this.props.wordList.length);
+  }
+  toggleGame() {
+    this.setState({
+      gameOn: !this.state.gameOn
+    });
+  }
+  render() {
+    debugger;
+    const {gameOn} = this.state;
+    const cardIndex = this.getRandomInt();
+    const cardInPlay = this.props.wordList[cardIndex];
+    // const key = cardInPlay.word;
+    const key = "athens";
+    return (
+      <div>
+        <div>
+          <button>Start a game</button>
+        </div>
+        {gameOn ?
+          <div>
+           <h2>{cardInPlay.definition}</h2>
+            <form onSubmit={e => this.handleForm(e, key)}>
+              <input
+                className="guessBox"
+                type="text"
+                value={this.state.guessBox}
+                onChange={e => this.guessHandler(e)}
+                />
+            </form>
+          </div> : null}
+        <br />
+        <Link to={"/"}>Back</Link>
+      </div>
+    );
+  }
+}
+*/

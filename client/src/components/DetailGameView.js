@@ -21,7 +21,6 @@ class DetailGameView extends Component {
   handleGuessText(e) {
     e.preventDefault();
     const {index} = this.props;
-    // eslint-disable-next-line
     const card = this.props.wordList[index];
     if (this.state.guessText === card.word) {
       this.setState({
@@ -49,7 +48,8 @@ class DetailGameView extends Component {
     this.props.handleGuessText(holder);
   }
   render() {
-    const {index} = this.props;
+    // eslint-disable-next-line
+    const {index, nextCard} = this.props;
     const cardInPlay = this.props.wordList[index];
     return (
       <div>
@@ -58,18 +58,23 @@ class DetailGameView extends Component {
             <h2>Definition: {cardInPlay.definition}</h2> :
           null}
           <br />
-          <input
-            onChange={this.storeGuessText.bind(this)}
-            placeholder="Please enter the word"
-          />
-          {this.state.attempt === true ?
-            <h3>Congratulations, you are correct!</h3> :
-            null
+          {nextCard && this.state.attempt ?
+            <div>test</div> :
+            <input
+              onChange={this.storeGuessText.bind(this)}
+              placeholder="Please enter the word"
+            />
           }
-          {this.state.attempt === false ?
-            <h3>That is wrong, try again!</h3> :
-            null
-          }
+          <div>
+            {this.state.attempt && nextCard ?
+              <h3>Congratulations, you are correct!</h3> :
+              null
+            }
+            {this.state.attempt === false && nextCard ?
+              <h3>That is wrong, try again!</h3> :
+              null
+            }
+          </div>
         </form>
       </div>
     );
@@ -79,6 +84,7 @@ class DetailGameView extends Component {
 DetailGameView.propTypes = {
   index: PropTypes.number,
   wordList: PropTypes.array,
+  nextCard: PropTypes.bool,
   handleGuessText: PropTypes.func
 };
 
