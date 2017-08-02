@@ -65,7 +65,7 @@ class DetailGameView extends Component {
               placeholder="Please enter the word"
             />
           }
-          <div>{life}</div>
+          <div>You current life is {life}</div>
           <div>
             {this.state.attempt && nextCard ?
               <h3>Congratulations, you are correct!</h3> :

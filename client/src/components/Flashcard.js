@@ -13,7 +13,8 @@ class Flashcard extends Component {
       userChange: {
         gamesPlayed: null
       },
-      life: 15
+      life: 15,
+      numCorrectWords: 0
     };
   }
   componentDidMount() {
@@ -35,7 +36,8 @@ class Flashcard extends Component {
     const currentLife = this.state.life;
     if (attempt) {
       this.setState({
-        life: currentLife + 2
+        life: currentLife + 2,
+        numCorrectWords: this.state.numCorrectWords + 1
       }, () => this.determineLose());
     } else {
       this.setState({
@@ -103,6 +105,13 @@ class Flashcard extends Component {
             >Next Word</button>
           </div> :
         null}
+        <br />
+        {this.state.life <= 0 ?
+          <div>
+            <span>Good game! You have learned </span>
+            <span>{this.state.numCorrectWords} words.
+            Congratulations! </span>
+          </div> : null}
         <br />
         <Link to="/">Back</Link>
       </div>
