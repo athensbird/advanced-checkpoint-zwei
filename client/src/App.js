@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import Navigation from "./components/Navigation";
 import ListOfPersonContainer from "./containers/ListOfPersonContainer";
 import CreatePeopleContainer from "./containers/CreatePeopleContainer";
 import PersonDetailContainer from "./containers/PersonDetailContainer";
@@ -23,19 +24,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <div className="links">
-            <Link to="/list">List</Link>
-            <br />
-            <Link to="/create">Create a Person</Link>
-            <br />
-            <Link to="/api">Dictionary</Link>
-            <br />
-            <Link to="/favorites">Favorite Words</Link>
-            <br />
-            <Link to="/flashcard">Flashcards</Link>
-            <br />
-            <Link to="/user">User Info</Link>
-          </div>
+          <Navigation />
           <Switch>
             <Route path="/list" exact component={ListOfPersonContainer} />
             <Route path="/create" component={CreatePeopleContainer} />

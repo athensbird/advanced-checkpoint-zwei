@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {Form, FormControl, Button} from "react-bootstrap";
 
 class Dictionary extends Component {
   constructor(props) {
@@ -21,24 +22,24 @@ class Dictionary extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={e => {
+        <Form inline onSubmit={e => {
           e.preventDefault();
           if (this.props.lookUp) {
             this.props.lookUp(this.state.searchText);
           }
         }}>
-          <input
+          <FormControl
             className="searchBox"
             name="Search"
             type="text"
             value={this.state.searchText}
             onChange={(event) => this.searchHandler(event)}
           />
-          <button>Submit</button>
+          <Button>Submit</Button>
           <br />
           <p>{this.props.word}</p>
-        </form>
-        <button onClick={e => {
+        </Form>
+        <Button onClick={e => {
           e.preventDefault();
           const wordArray = {
             word: this.state.searchText,
@@ -47,14 +48,14 @@ class Dictionary extends Component {
             masterLevel: 1
           };
           this.props.addToFavorites(wordArray);
-        }}>Add to Favorites</button>
-        <button onClick={e => {
+        }}>Add to Favorites</Button>
+        <Button onClick={e => {
           e.preventDefault();
           this.props.clearWord();
           this.setState({
             searchText: ""
           });
-        }}>Clear</button>
+        }}>Clear</Button>
         <br />
         <Link to={"/"}>Back</Link>
       </div>

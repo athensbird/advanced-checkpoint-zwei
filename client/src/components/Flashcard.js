@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import DetailGameView from "./DetailGameView";
 import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
 class Flashcard extends Component {
   constructor(props) {
@@ -96,10 +97,10 @@ class Flashcard extends Component {
   render() {
     return (
       <div>
-        <button
+        <Button
           onClick={e => this.toggleGame(e)}>
           {this.state.gameOn ? "Quit" : "Start"}
-        </button>
+        </Button>
         {this.state.gameOn ?
           <div>
             {this.state.randomNum || this.state.randomNum === 0 ?
@@ -113,10 +114,10 @@ class Flashcard extends Component {
                   this.proveGuessText(word, attempt)
                 }
               /> : null}
-            <button
+            <Button
               // this function should reset all the sub states
               onClick={e => this.resetGame(e)}
-            >Next Word</button>
+            >Next Word</Button>
           </div> :
         null}
         <br />
