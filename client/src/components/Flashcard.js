@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import DetailGameView from "./DetailGameView";
+import Lifecount from "./Lifecount";
 import {Link} from "react-router-dom";
 import {Button, Jumbotron} from "react-bootstrap";
 
@@ -104,7 +105,7 @@ class Flashcard extends Component {
         <Jumbotron>
           {this.state.gameOn ?
             <div>
-            <h3>Your current life is {this.state.life}</h3>
+            <Lifecount life={this.state.life} />
               {this.state.randomNum || this.state.randomNum === 0 ?
                 <DetailGameView
                   index={this.state.randomNum}

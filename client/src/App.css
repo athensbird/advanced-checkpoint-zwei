@@ -86,6 +86,13 @@
   width: 50%;
 }
 
+.glyphicon {
+  color: red;
+  font-size: 30px;
+  float: right;
+  margin-bottom: 2%;
+}
+
 h2 {
   font-family: 'Indie Flower', cursive;
   text-align: left;
