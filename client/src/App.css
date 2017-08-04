@@ -18,13 +18,35 @@
   font-size: large;
 }
 
-.nav {
-  padding-left: 70px;
-  padding-right: 70px;
+.dictionary-form {
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.searchBox {
+  margin-right: 0.7%;
+}
+
+.btn-default {
+  margin-right: 2%;
+}
+
+.back {
+  padding-top: 2%;
+  text-align: center;
+}
+
+.jumbotron {
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-left: 20%;
+  padding-right: 20%;
 }
 
 body {
   font-size: 18px;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

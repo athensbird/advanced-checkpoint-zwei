@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import {Navbar, Nav} from "react-bootstrap";
-import {NavLink} from "react-router-dom";
+import {Navbar, Nav, NavItem} from "react-bootstrap";
 import "../App.css";
 
 class Navigation extends Component {
@@ -8,19 +7,11 @@ class Navigation extends Component {
     return (
       <Navbar>
         <Nav>
-          <NavLink to="/">Home</NavLink>
-        </Nav>
-        <Nav>
-          <NavLink to="/api">Dictionary</NavLink>
-        </Nav>
-        <Nav>
-          <NavLink to="/favorites">Favorite Words</NavLink>
-        </Nav>
-        <Nav>
-          <NavLink to="/flashcard">Flashcards</NavLink>
-        </Nav>
-        <Nav>
-          <NavLink to="/user">User Info</NavLink>
+          <NavItem eventKey="1" className="navitems" href="/">Home</NavItem>
+          <NavItem eventKey="2" className="navitems" href="/api">Dictionary</NavItem>
+          <NavItem eventKey="3" className="navitems" href="/favorites">Favorite Words</NavItem>
+          <NavItem eventKey="4" className="navitems" href="/flashcard">Flashcards</NavItem>
+          <NavItem eventKey="5" className="navitems" href="/user">User Info</NavItem>
         </Nav>
       </Navbar>
     );
