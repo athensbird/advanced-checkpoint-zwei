@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import DetailDisplay from "./DetailDisplay";
 import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
 
 class UserDetail extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class UserDetail extends Component {
             handleUsername={(username) => this.registerUsername(username)}
              /> :
           <p>Loading the data, please wait...</p>}
-          <Link to="/">Back</Link>
+          <Button><Link to="/">Back</Link></Button>
         </div>
       </div>
     );

@@ -50,15 +50,15 @@ class DetailDisplay extends Component {
                 <td>{this.props.user.gamesPlayed}</td>
               </tr>
             </tbody>
+          </Table>
+          <div>
             {!this.state.reset ?
-              <div>
-                <Button onClick={e => this.toggleReset(e)}>Reset Username</Button>
-              </div> :
+              <Button onClick={e => this.toggleReset(e)}>Reset Username</Button> :
               <UsernameReset
                 handleUsername={e => this.handleUsername(e)}
                 storeUsername={e => this.storeUsername(e)}
               />}
-          </Table>
+          </div>
         </Jumbotron>
       </div>
     );

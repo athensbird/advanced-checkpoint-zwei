@@ -126,12 +126,19 @@ class Flashcard extends Component {
         <br />
         {this.state.life <= 0 ?
           <div>
-            <span>Good game! You have learned </span>
-            <span>{this.state.numCorrectWords} words.
-            Congratulations! </span>
-          </div> : null}
-        <br />
-        <Link to="/">Back</Link>
+          {this.state.numCorrectWords > 0 ?
+            <div>
+              <span>Good game! You have learned </span>
+              <span>{this.state.numCorrectWords} words.
+              Congratulations! </span>
+            </div> :
+            <div>
+              <span>Oh, seems like someone needs to hit the book!</span>
+            </div>
+          }
+          </div> : null
+        }
+        <Button><Link to="/">Back</Link></Button>
       </div>
     );
   }
