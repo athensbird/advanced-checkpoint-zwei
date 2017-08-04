@@ -60,10 +60,10 @@ class DetailGameView extends Component {
           null}
           <br />
           {nextCard && this.state.attempt ?
-            <div>test</div> :
+            null :
             <FormControl
               onChange={this.storeGuessText.bind(this)}
-              placeholder="Please enter the word"
+              placeholder="What's that? Make a guess and enter!"
             />
           }
           <div>

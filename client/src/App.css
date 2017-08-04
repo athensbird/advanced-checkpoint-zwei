@@ -60,7 +60,6 @@
 
 .btn-default {
   margin-top: 5%;
-  margin-bottom: 3%;
 }
 
 .btn-primary {
@@ -75,14 +74,6 @@
   margin-bottom: 2%;
 }
 
-.input-username-reset {
-  /*width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;*/
-  margin-top: 2%;
-  margin-bottom: 2%;
-}
-
 .user-info {
   padding-left: 0;
   padding-right: 0;
@@ -93,6 +84,11 @@
   float: left;
   margin-left: 3%;
   width: 50%;
+}
+
+h2 {
+  font-family: 'Indie Flower', cursive;
+  text-align: left;
 }
 
 th, tr {
