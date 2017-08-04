@@ -17,10 +17,25 @@ const WordController = {
       .catch(err => res.json(err));
   },
   create: (req, res, next) => {
-    const word = new Word(req.body);
-    word.save()
-      .then(savedWord => res.json(savedWord))
-      .catch(err => res.json(err));
+    console.log("create word triggered!");
+    const {word} = req.body;
+    // check db to prevent duplicate words
+    Word.findOne(
+      {
+        $or: [
+               { 'word' : word},
+             ]
+      }).exec()
+      .then(existingWord => {
+        console.log("existingWord", existingWord);
+        if (existingWord) {
+          return res.status(422).json({err: "Word already in the list"});
+        }
+        const newWord = new Word(req.body);
+        newWord.save()
+          .then(savedWord => res.json(savedWord))
+          .catch(err => res.json(err));
+      });
   },
   update: (req, res, next) => {
     console.log(req.body, req.params.id);

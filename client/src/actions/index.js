@@ -5,6 +5,7 @@ export const USER_LOADED = "USER_LOADED";
 export const ADDED_TO_FAVORITES = "ADDED_TO_FAVORITES";
 export const WORD_LIST_LOADED = "WORD_LIST_LOADED";
 export const CLEAR_WORD = "CLEAR_WORD";
+export const WORD_ALREADY_ADDED = "WORD_ALREADY_ADDED";
 
 export function loadPeople() {
   return function (dispatch) {
@@ -175,18 +176,8 @@ export function addToFavoritos(array) {
   };
 }
 
-// export function checkWordDuplicates() {
-//   return function (dispatch) {
-//     fetch("http://localhost:3001/favorites", {
-//       method: "GET",
-//       headers: {"Content-Type": "application/json; charset=utf-8",
-//         "Access-Control-Allow-Origin": "*"},
-//     })
-//   }
-// }
-
 /*
-Step 1: Route a GET request to /favorites
+Step 1: Route a GET request to /api
 Step 2: Use Word.findOne(array.word) to check if there is an existing user
 Step 3: If there is an existing user, return res.status(422).json(err: "err msg")
 Step 4: Build an error handling middleware
@@ -205,11 +196,22 @@ export function addToFavorites(array) {
       cache: "default",
       body: JSON.stringify(array)
     }).then((res) => {
+      if (res.status === 422) {
+        console.log("Word alreay in use!");
+        dispatch(addToFavoritesError(res.err));
+      }
       dispatch(loadWordList());
       return res.json();
     }).catch((err) => {
       console.log(err);
     });
+  };
+}
+
+export function addToFavoritesError(err) {
+  return {
+    type: WORD_ALREADY_ADDED,
+    err
   };
 }
 
