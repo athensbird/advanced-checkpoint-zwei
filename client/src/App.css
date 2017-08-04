@@ -50,7 +50,16 @@
 }
 
 .list-group-item {
-  margin-right: 70%
+  margin-right: 70%;
+}
+
+.table-responsive {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+th {
+  text-align: center;
 }
 
 body {

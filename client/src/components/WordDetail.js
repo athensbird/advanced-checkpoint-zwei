@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {Table, Button} from "react-bootstrap";
 
 class WordDetail extends Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class WordDetail extends Component {
     };
   }
   handleRepeats() {
-    console.log("Repeat Handler Triggered!");
     this.setState({
       repeatedTimes: this.state.repeatedTimes + 1
     });
@@ -29,7 +29,7 @@ class WordDetail extends Component {
           </div> : null}
         {!deleted ?
           <div>
-            <table>
+            <Table striped bordered condensed responsive>
               <thead>
                 <tr>
                   <th>Word</th>
@@ -46,23 +46,15 @@ class WordDetail extends Component {
                   <td>{item.masterLevel}</td>
                 </tr>
               </tbody>
-            </table>
-            <br />
-            <button onClick={e => {
-              e.preventDefault();
-              this.setState({
-                repeatedTimes: this.state.repeatedTimes + 1
-              });
-              const newState = Object.assign(item, {repeatedTimes: this.state.repeatedTimes});
-              this.props.practice(newState);
-            }}>Practice</button>
-            <button onClick={e => {
-              this.props.deleteWord(e, item);
-              this.setState({
-                deleted: !this.state.deleted
-              });
-            }}>Delete</button>
-            <br />
+            </Table>
+            <div className="dictionary-form">
+              <Button onClick={e => {
+                this.props.deleteWord(e, item);
+                this.setState({
+                  deleted: !this.state.deleted
+                });
+              }}>Delete this word</Button>
+            </div>
           </div> : null}
         <Link to={"/favorites/"}>Back to List</Link>
         <br />
