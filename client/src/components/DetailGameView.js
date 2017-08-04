@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {Form, FormControl, Button} from "react-bootstrap";
 
 class DetailGameView extends Component {
   constructor(props) {
@@ -49,23 +50,22 @@ class DetailGameView extends Component {
   }
   render() {
     // eslint-disable-next-line
-    const {index, nextCard, life} = this.props;
+    const {index, nextCard} = this.props;
     const cardInPlay = this.props.wordList[index];
     return (
       <div>
-        <form onSubmit={e => this.handleGuessText(e)}>
+        <Form onSubmit={e => this.handleGuessText(e)}>
           {cardInPlay ?
             <h2>Definition: {cardInPlay.definition}</h2> :
           null}
           <br />
           {nextCard && this.state.attempt ?
             <div>test</div> :
-            <input
+            <FormControl
               onChange={this.storeGuessText.bind(this)}
               placeholder="Please enter the word"
             />
           }
-          <div>You current life is {life}</div>
           <div>
             {this.state.attempt && nextCard ?
               <h3>Congratulations, you are correct!</h3> :
@@ -76,7 +76,7 @@ class DetailGameView extends Component {
               null
             }
           </div>
-        </form>
+        </Form>
       </div>
     );
   }

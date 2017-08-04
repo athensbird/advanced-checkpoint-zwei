@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import DetailGameView from "./DetailGameView";
 import {Link} from "react-router-dom";
-import {Button} from "react-bootstrap";
+import {Button, Jumbotron} from "react-bootstrap";
 
 class Flashcard extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Flashcard extends Component {
       userChange: {
         gamesPlayed: null
       },
-      life: 15,
+      life: 5,
       numCorrectWords: 0
     };
   }
@@ -51,12 +51,12 @@ class Flashcard extends Component {
     const currentLife = this.state.life;
     if (attempt) {
       this.setState({
-        life: currentLife + 2,
+        life: currentLife + 1,
         numCorrectWords: this.state.numCorrectWords + 1
       }, () => this.determineLose());
     } else {
       this.setState({
-        life: currentLife - 5
+        life: currentLife - 2
       }, () => this.determineLose());
     }
   }
@@ -97,29 +97,31 @@ class Flashcard extends Component {
   render() {
     return (
       <div>
-        <Button
+        <Button bsStyle="primary" bsSize="large" block
           onClick={e => this.toggleGame(e)}>
-          {this.state.gameOn ? "Quit" : "Start"}
+          {this.state.gameOn ? "Quit" : "Start a new game"}
         </Button>
-        {this.state.gameOn ?
-          <div>
-            {this.state.randomNum || this.state.randomNum === 0 ?
-              <DetailGameView
-                index={this.state.randomNum}
-                wordList={this.props.wordList}
-                nextCard={this.state.nextCard}
-                life={this.state.life}
-                handleGuessText={
-                  (word, attempt) =>
-                  this.proveGuessText(word, attempt)
-                }
-              /> : null}
-            <Button
-              // this function should reset all the sub states
-              onClick={e => this.resetGame(e)}
-            >Next Word</Button>
-          </div> :
-        null}
+        <Jumbotron>
+          {this.state.gameOn ?
+            <div>
+            <h3>Your current life is {this.state.life}</h3>
+              {this.state.randomNum || this.state.randomNum === 0 ?
+                <DetailGameView
+                  index={this.state.randomNum}
+                  wordList={this.props.wordList}
+                  nextCard={this.state.nextCard}
+                  handleGuessText={
+                    (word, attempt) =>
+                    this.proveGuessText(word, attempt)
+                  }
+                /> : null}
+              <Button bsSize="large" block className="btn-next-word"
+                // this function should reset all the sub states
+                onClick={e => this.resetGame(e)}
+              >Next Word</Button>
+            </div> :
+          null}
+        </Jumbotron>
         <br />
         {this.state.life <= 0 ?
           <div>

@@ -58,6 +58,18 @@
   margin-right: 10%;
 }
 
+.btn-primary {
+  width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-bottom: 3%;
+}
+
+.btn-next-word {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
 th {
   text-align: center;
 }
