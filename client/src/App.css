@@ -35,6 +35,7 @@
 .back {
   padding-top: 2%;
   text-align: center;
+  text-decoration-color: white;
 }
 
 .jumbotron {
@@ -42,6 +43,14 @@
   padding-bottom: 0.5%;
   padding-left: 20%;
   padding-right: 20%;
+}
+
+.list-group {
+  text-align: left;
+}
+
+.list-group-item {
+  margin-right: 70%
 }
 
 body {

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {ListGroup, ListGroupItem, Jumbotron} from "react-bootstrap";
 
 class Favorites extends Component {
   constructor(props) {
@@ -15,14 +16,19 @@ class Favorites extends Component {
       return (
         // eslint-disable-next-line
         <div key={item._id}>
-          <li>{item.word}</li>
-          <Link to={"/favorites/" + item._id}>Detail Page</Link>
+          <ListGroup>
+            <ListGroupItem>
+              <Link
+                to={"/favorites/" + item._id}>
+                {item.word}</Link>
+            </ListGroupItem>
+          </ListGroup>
         </div>
       );
     });
     return (
       <div>
-        <p>Hallo</p>
+        <Jumbotron>Hallo, click on the word to learn the details!</Jumbotron>
         <div>{listOfWords}</div>
         <Link to={"/"}>Back</Link>
       </div>

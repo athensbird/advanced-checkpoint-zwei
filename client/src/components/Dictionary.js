@@ -65,7 +65,7 @@ class Dictionary extends Component {
           }}>Clear</Button>
           <br />
         </div>
-        <Button>
+        <Button bsStyle="default">
           <NavLink className="back" to={"/"}>Back</NavLink>
         </Button>
       </div>

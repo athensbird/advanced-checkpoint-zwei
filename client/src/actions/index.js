@@ -174,6 +174,23 @@ export function addToFavoritos(array) {
   };
 }
 
+// export function checkWordDuplicates() {
+//   return function (dispatch) {
+//     fetch("http://localhost:3001/favorites", {
+//       method: "GET",
+//       headers: {"Content-Type": "application/json; charset=utf-8",
+//         "Access-Control-Allow-Origin": "*"},
+//     })
+//   }
+// }
+
+/*
+Step 1: Route a GET request to /favorites
+Step 2: Use Word.findOne(array.word) to check if there is an existing user
+Step 3: If there is an existing user, return res.status(422).json(err: "err msg")
+Step 4: Build an error handling middleware
+*/
+
 export function addToFavorites(array) {
   return function (dispatch) {
     fetch("http://localhost:3001/api", {
