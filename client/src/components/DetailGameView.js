@@ -19,6 +19,27 @@ class DetailGameView extends Component {
       guessText: e.target.value
     });
   }
+  calculateWordLevel(times) {
+    if (times < 3) {
+      return 1;
+    } else if (times >= 3 && times < 6) {
+      return 2;
+    } else if (times >= 6 && times < 10) {
+      return 3;
+    } else if (times >= 10 && times < 20) {
+      return 4;
+    }
+    return 5;
+  }
+  updateWordLevel(index, wordChange, attempt) {
+    const repeatedTimesBefore = wordChange.repeatedTimes;
+    this.setState({
+      wordChange: {
+        masterLevel: this.calculateWordLevel(repeatedTimesBefore),
+        repeatedTimes: repeatedTimesBefore
+      }
+    }, () => this.passWordToRedux(index, attempt));
+  }
   handleGuessText(e) {
     e.preventDefault();
     const {index} = this.props;
@@ -27,11 +48,10 @@ class DetailGameView extends Component {
       this.setState({
         attempt: true,
         wordChange: {
-          masterLevel: card.masterLevel + 1,
           repeatedTimes: card.repeatedTimes + 1
         }
         // async callback function to pass the object to upper level
-      }, () => this.passWordToRedux(index, this.state.attempt));
+      }, () => this.updateWordLevel(index, this.state.wordChange, this.state.attempt));
     } else {
       this.setState({
         attempt: false,

@@ -82,7 +82,6 @@ class Flashcard extends Component {
   toggleGame(e) {
     // always prevent default events lest an infinite loop stacks over
     e.preventDefault();
-    console.log("toggleGame started");
     const user = this.props.user[0];
     const gamesPlayedBefore = user.gamesPlayed;
     this.setState({
@@ -92,7 +91,6 @@ class Flashcard extends Component {
       }}, () => this.updateUserLevel(this.state));
   }
   calculateUserLevel(gamesPlayed) {
-    console.log("calculateUserLevel started", gamesPlayed);
     if (gamesPlayed < 10) {
       return 1;
     } else if (gamesPlayed >= 10 && gamesPlayed < 145) {
@@ -105,7 +103,6 @@ class Flashcard extends Component {
   }
   updateUserLevel(state) {
     const games = state.userChange.gamesPlayed;
-    console.log("updateUserLevel started", games);
     this.setState({
       userChange: {
         gamesPlayed: games,
@@ -115,7 +112,6 @@ class Flashcard extends Component {
   }
   passUserToRedux(state) {
     const changedUser = state.userChange;
-    console.log("passUserToRedux started", changedUser);
     const holder = Object.assign(
       {}, this.props.user[0],
       changedUser
