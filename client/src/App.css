@@ -63,8 +63,12 @@
   margin-right: 10%;
 }
 
+.resetUsername {
+  text-align: center;
+}
+
 .btn-default {
-  margin-top: 5%;
+  margin-top: 1%;
 }
 
 .btn-primary {
@@ -72,6 +76,10 @@
   margin-left: 35%;
   margin-right: 35%;
   margin-bottom: 3%;
+}
+
+.btn-success {
+  margin-right: 1%;
 }
 
 .btn-next-word {

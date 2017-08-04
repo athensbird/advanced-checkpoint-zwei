@@ -46,7 +46,7 @@ class Dictionary extends Component {
           <p>{this.props.word}</p>
         </Jumbotron>
         <div className="dictionary-form">
-          <Button onClick={e => {
+          <Button bsStyle="success" onClick={e => {
             e.preventDefault();
             const wordArray = {
               word: this.state.searchText,
@@ -56,7 +56,7 @@ class Dictionary extends Component {
             };
             this.props.addToFavorites(wordArray);
           }}>Add to Favorites</Button>
-          <Button onClick={e => {
+          <Button bsStyle="warning" onClick={e => {
             e.preventDefault();
             this.props.clearWord();
             this.setState({

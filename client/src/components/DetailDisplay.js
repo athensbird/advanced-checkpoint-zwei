@@ -51,7 +51,7 @@ class DetailDisplay extends Component {
               </tr>
             </tbody>
           </Table>
-          <div>
+          <div className="resetUsername">
             {!this.state.reset ?
               <Button onClick={e => this.toggleReset(e)}>Reset Username</Button> :
               <UsernameReset
