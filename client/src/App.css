@@ -58,6 +58,11 @@
   margin-right: 10%;
 }
 
+.btn-default {
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+
 .btn-primary {
   width: 30%;
   margin-left: 35%;
@@ -70,7 +75,27 @@
   margin-bottom: 2%;
 }
 
-th {
+.input-username-reset {
+  /*width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;*/
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.user-info {
+  padding-left: 0;
+  padding-right: 0;
+  text-align: left;
+}
+
+.user-detail {
+  float: left;
+  margin-left: 3%;
+  width: 50%;
+}
+
+th, tr {
   text-align: center;
 }
 

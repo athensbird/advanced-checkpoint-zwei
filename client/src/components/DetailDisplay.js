@@ -1,13 +1,23 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import {Jumbotron, Button, Table} from "react-bootstrap";
+// import {Link} from "react-router-dom";
+import UsernameReset from "./UsernameReset";
 // import {Link} from "react-router-dom";
 
 class DetailDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: ""
+      username: "",
+      reset: false
     };
+  }
+  toggleReset(e) {
+    e.preventDefault();
+    this.setState({
+      reset: true
+    });
   }
   storeUsername(e) {
     this.setState({
@@ -16,21 +26,40 @@ class DetailDisplay extends Component {
   }
   handleUsername(e) {
     e.preventDefault();
+    this.setState({
+      reset: false
+    });
     this.props.handleUsername(this.state);
   }
   render() {
     return (
       <div>
-        <form>
-          <p>Setup your username</p>
-          <input
-            onChange={this.storeUsername.bind(this)}
-            placeholder="Enter your new username"
-          />
-          <button onClick={e => this.handleUsername(e)}>Submit</button>
-          <p>Your Level: {this.props.user.level}</p>
-          <p>You have played {this.props.user.gamesPlayed} games</p>
-        </form>
+        <Jumbotron className="user-info">
+          <Table striped condensed responsive>
+            <thead>
+              <tr>
+                <th>Your username</th>
+                <th>Your Level</th>
+                <th>Games Played</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{this.props.user.username}</td>
+                <td>{this.props.user.level}</td>
+                <td>{this.props.user.gamesPlayed}</td>
+              </tr>
+            </tbody>
+            {!this.state.reset ?
+              <div>
+                <Button onClick={e => this.toggleReset(e)}>Reset Username</Button>
+              </div> :
+              <UsernameReset
+                handleUsername={e => this.handleUsername(e)}
+                storeUsername={e => this.storeUsername(e)}
+              />}
+          </Table>
+        </Jumbotron>
       </div>
     );
   }

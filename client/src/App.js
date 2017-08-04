@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Navigation from "./components/Navigation";
 import ListOfPersonContainer from "./containers/ListOfPersonContainer";
 import CreatePeopleContainer from "./containers/CreatePeopleContainer";
@@ -11,7 +11,7 @@ import FavoritesContainer from "./containers/FavoritesContainer";
 import WordDetailContainer from "./containers/WordDetailContainer";
 import FlashcardContainer from "./containers/FlashcardContainer";
 import UserContainer from "./containers/UserContainer";
-
+import UsernameReset from "./components/UsernameReset";
 class App extends Component {
   constructor() {
     super();
@@ -34,6 +34,7 @@ class App extends Component {
             <Route path="/favorites/:id" component={WordDetailContainer} />
             <Route path="/flashcard" exact component={FlashcardContainer} />
             <Route path="/user" exact component={UserContainer} />
+            <Route path="/user/resetusername" component={UsernameReset} />
           </Switch>
         </div>
       </BrowserRouter>

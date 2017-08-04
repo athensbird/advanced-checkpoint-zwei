@@ -23,13 +23,14 @@ class UserDetail extends Component {
     const currentUser = this.props.user[0];
     return (
       <div>
-        {currentUser ? <p>Status:Ready </p> : <p>Status:Processing </p>}
-        {currentUser ? <DetailDisplay
-          user={currentUser}
-          handleUsername={(username) => this.registerUsername(username)}
-           /> :
-        <p>Loading the data, please wait...</p>}
-        <Link to="/">Back</Link>
+        <div className="user-detail">
+          {currentUser ? <DetailDisplay
+            user={currentUser}
+            handleUsername={(username) => this.registerUsername(username)}
+             /> :
+          <p>Loading the data, please wait...</p>}
+          <Link to="/">Back</Link>
+        </div>
       </div>
     );
   }
