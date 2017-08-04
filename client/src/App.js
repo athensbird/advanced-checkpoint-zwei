@@ -11,6 +11,7 @@ import FavoritesContainer from "./containers/FavoritesContainer";
 import WordDetailContainer from "./containers/WordDetailContainer";
 import FlashcardContainer from "./containers/FlashcardContainer";
 import UserContainer from "./containers/UserContainer";
+import Intro from "./components/Intro";
 import UsernameReset from "./components/UsernameReset";
 class App extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class App extends Component {
         <div>
           <Navigation />
           <Switch>
+            <Route path="/home" component={Intro} />
             <Route path="/list" exact component={ListOfPersonContainer} />
             <Route path="/create" component={CreatePeopleContainer} />
             <Route path="/list/:id" component={PersonDetailContainer} />

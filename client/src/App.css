@@ -45,6 +45,11 @@
   padding-right: 20%;
 }
 
+.intro {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 .list-group {
   text-align: left;
 }

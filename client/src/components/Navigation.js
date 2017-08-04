@@ -7,7 +7,7 @@ class Navigation extends Component {
     return (
       <Navbar>
         <Nav>
-          <NavItem eventKey="1" className="navitems" href="/">Home</NavItem>
+          <NavItem eventKey="1" className="navitems" href="/home">Home</NavItem>
           <NavItem eventKey="2" className="navitems" href="/api">Dictionary</NavItem>
           <NavItem eventKey="3" className="navitems" href="/favorites">Favorite Words</NavItem>
           <NavItem eventKey="4" className="navitems" href="/flashcard">Flashcards</NavItem>
