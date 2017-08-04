@@ -25,6 +25,7 @@ const UserController = {
         user.username = req.body.username || user.username;
         user.level = req.body.level || user.level;
         user.gamesPlayed = req.body.gamesPlayed || user.gamesPlayed;
+        user.level = req.body.level || user.level;
         user.save()
       })
       .then(user => res.json(user))

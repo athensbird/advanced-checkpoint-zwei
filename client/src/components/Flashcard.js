@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import DetailGameView from "./DetailGameView";
 import Lifecount from "./Lifecount";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {Button, Jumbotron} from "react-bootstrap";
 
 class Flashcard extends Component {
@@ -13,7 +13,8 @@ class Flashcard extends Component {
       nextCard: true,
       randomNum: null,
       userChange: {
-        gamesPlayed: null
+        gamesPlayed: null,
+        level: null
       },
       life: 5,
       numCorrectWords: 0
@@ -24,7 +25,6 @@ class Flashcard extends Component {
     this.props.loadUser();
   }
   getRandomInt() {
-    console.log("getRandomInt triggered");
     this.setState({
       randomNum: Math.floor(Math.random() * this.props.wordList.length),
     });
@@ -62,11 +62,13 @@ class Flashcard extends Component {
     }
   }
   determineLose() {
+    const gamesPlayedBefore = this.state.userChange.gamesPlayed;
     if (this.state.life <= 0 ) {
       this.setState({
-        gameOn: false
-      });
-      console.log("You lost!");
+        gameOn: false,
+        userChange: {
+          gamesPlayed: gamesPlayedBefore + 1
+        }}, () => this.passUserToRedux(this.state));
     }
   }
   proveGuessText(word, attempt) {
@@ -80,15 +82,40 @@ class Flashcard extends Component {
   toggleGame(e) {
     // always prevent default events lest an infinite loop stacks over
     e.preventDefault();
+    console.log("toggleGame started");
     const user = this.props.user[0];
     const gamesPlayedBefore = user.gamesPlayed;
     this.setState({
       gameOn: !this.state.gameOn,
       userChange: {
-        gamesPlayed: this.state.gameOn ? gamesPlayedBefore + 1 : null
-      }}, () => this.passUserToRedux(this.state.userChange));
+        gamesPlayed: this.state.gameOn ? gamesPlayedBefore + 1 : gamesPlayedBefore
+      }}, () => this.updateUserLevel(this.state));
   }
-  passUserToRedux(changedUser) {
+  calculateUserLevel(gamesPlayed) {
+    console.log("calculateUserLevel started", gamesPlayed);
+    if (gamesPlayed < 10) {
+      return 1;
+    } else if (gamesPlayed >= 10 && gamesPlayed < 145) {
+      return Math.floor((2 + (gamesPlayed - 10) / 15));
+    } else if (gamesPlayed >= 145 && gamesPlayed < 1145) {
+      return Math.floor((10 + (gamesPlayed - 145) / 25));
+    }
+    return Math.floor((50 + (gamesPlayed - 1145) / 50));
+    // following is the default scenario, no need to use else
+  }
+  updateUserLevel(state) {
+    const games = state.userChange.gamesPlayed;
+    console.log("updateUserLevel started", games);
+    this.setState({
+      userChange: {
+        gamesPlayed: games,
+        level: this.calculateUserLevel(games)
+      }
+    }, () => this.passUserToRedux(this.state));
+  }
+  passUserToRedux(state) {
+    const changedUser = state.userChange;
+    console.log("passUserToRedux started", changedUser);
     const holder = Object.assign(
       {}, this.props.user[0],
       changedUser
@@ -105,7 +132,7 @@ class Flashcard extends Component {
         <Jumbotron>
           {this.state.gameOn ?
             <div>
-            <Lifecount life={this.state.life} />
+              <Lifecount life={this.state.life} />
               {this.state.randomNum || this.state.randomNum === 0 ?
                 <DetailGameView
                   index={this.state.randomNum}
@@ -126,19 +153,21 @@ class Flashcard extends Component {
         <br />
         {this.state.life <= 0 ?
           <div>
-          {this.state.numCorrectWords > 0 ?
-            <div>
-              <span>Good game! You have learned </span>
-              <span>{this.state.numCorrectWords} words.
-              Congratulations! </span>
-            </div> :
-            <div>
-              <span>Oh, seems like someone needs to hit the book!</span>
-            </div>
-          }
+            {this.state.numCorrectWords > 0 ?
+              <div>
+                <span>Good game! You have learned </span>
+                <span>{this.state.numCorrectWords} words.
+                Congratulations! </span>
+              </div> :
+              <div>
+                <span>Oh, seems like someone needs to hit the book!</span>
+              </div>
+            }
           </div> : null
         }
-        <Button><Link to="/">Back</Link></Button>
+        <Button>
+          <NavLink className="back" to={"/"}>Back</NavLink>
+        </Button>
       </div>
     );
   }

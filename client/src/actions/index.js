@@ -73,6 +73,7 @@ export function loadWordList() {
 }
 
 export function updateUser(payload) {
+  console.log("updateUser", payload);
   return function (dispatch) {
     fetch("http://localhost:3001/user/", {
       method: "PUT",
