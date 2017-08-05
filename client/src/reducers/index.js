@@ -1,7 +1,8 @@
 import {combineReducers} from "redux";
 import {
   PEOPLE_LOADED, WORD_LOADED, ADDED_TO_FAVORITES,
-  WORD_LIST_LOADED, CLEAR_WORD, USER_LOADED
+  WORD_LIST_LOADED, CLEAR_WORD, USER_LOADED,
+  WORD_ALREADY_ADDED
 } from "../actions";
 
 function people(state = [], action) {
@@ -28,6 +29,8 @@ function wordList(state = [], action) {
       return [...state, action.array];
     case WORD_LIST_LOADED:
       return action.list;
+    case WORD_ALREADY_ADDED:
+      console.log("Awaiting to be handled");
   }
   return state;
 }
