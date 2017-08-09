@@ -70,7 +70,7 @@ app.get('/api/:word', function(req,res){
 
 mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/checkpoint-zwei");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/checkpoint-zwei");
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
@@ -78,7 +78,7 @@ db.once("open", () => {
   console.log("MongoDB Connected!!!");
 });
 
-const port =  3001;
+const port =  process.env.PORT || 3001;
 
 app.listen(port, () => {
   console.log(`Listening on port:${port}`);
