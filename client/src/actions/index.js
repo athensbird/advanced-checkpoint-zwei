@@ -6,10 +6,12 @@ export const ADDED_TO_FAVORITES = "ADDED_TO_FAVORITES";
 export const WORD_LIST_LOADED = "WORD_LIST_LOADED";
 export const CLEAR_WORD = "CLEAR_WORD";
 export const WORD_ALREADY_ADDED = "WORD_ALREADY_ADDED";
+// eslint-disable-next-line
+import ApiPaths from "../config/config";
 
 export function loadPeople() {
   return function (dispatch) {
-    fetch("http://localhost:3001/list")
+    fetch(ApiPaths.API_URL + "/people")
     // eslint-disable-next-line
     .then((res, next) => {
       console.log(res);
@@ -44,7 +46,7 @@ export function userLoaded(currentUser) {
 export function loadUser() {
   console.log("Started to load users!");
   return function (dispatch) {
-    fetch("http://localhost:3001/user")
+    fetch(ApiPaths.API_URL + "/user")
     // eslint-disable-next-line
     .then((res, next) => {
       return res.json();
@@ -59,7 +61,7 @@ export function loadUser() {
 export function loadWordList() {
   console.log("Started to load word list!");
   return function (dispatch) {
-    fetch("http://localhost:3001/api")
+    fetch(ApiPaths.API_URL + "/api")
     // eslint-disable-next-line
     .then((res, next) => {
       return res.json();
@@ -76,7 +78,7 @@ export function loadWordList() {
 export function updateUser(payload) {
   console.log("updateUser", payload);
   return function (dispatch) {
-    fetch("http://localhost:3001/user/", {
+    fetch(ApiPaths.API_URL + "/user", {
       method: "PUT",
       headers: {"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*"},
@@ -90,7 +92,7 @@ export function updateUser(payload) {
 
 export function updateWord(word) {
   return function (dispatch) {
-    fetch("http://localhost:3001/favorites/" + word._id, {
+    fetch(ApiPaths.API_URL + "/favorites/" + word._id, {
       method: "PUT",
       headers: {"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*"},
@@ -159,7 +161,7 @@ export function lookUp(word) {
   return function (dispatch) {
     if (!word ) {return false;}
     // fetch node server at port 3001
-    fetch("http://localhost:3001/api/" + word, {
+    fetch(ApiPaths.API_URL + "/api/" + word, {
       method: "GET",
     }).then(res => {
       return res.json();
@@ -185,7 +187,7 @@ Step 4: Build an error handling middleware
 
 export function addToFavorites(array) {
   return function (dispatch) {
-    fetch("http://localhost:3001/api", {
+    fetch(ApiPaths.API_URL + "/api", {
       method: "POST",
       headers: {"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*",
@@ -224,7 +226,7 @@ export function clearWord() {
 export function practice(item) {
   console.log("practice passed", item);
   return function (dispatch) {
-    fetch("http://localhost:3001/favorites/" + item._id, {
+    fetch(ApiPaths.API_URL + "/favorites/" + item._id, {
       method: "PUT",
       headers: {"Content-Type": "application/json; charset=utf-8",
         "Access-Control-Allow-Origin": "*"},
@@ -239,7 +241,7 @@ export function practice(item) {
 
 export function deleteWord(item) {
   return function (dispatch) {
-    fetch("http://localhost:3001/favorites/" + item._id, {
+    fetch(ApiPaths.API_URL + "/favorites/" + item._id, {
       method: "DELETE",
       headers: {"Content-Type": "application/json"}
     }).then(() => {
