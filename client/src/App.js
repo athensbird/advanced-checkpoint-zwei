@@ -3,9 +3,6 @@ import "./App.css";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Navigation from "./components/Navigation";
-import ListOfPersonContainer from "./containers/ListOfPersonContainer";
-import CreatePeopleContainer from "./containers/CreatePeopleContainer";
-import PersonDetailContainer from "./containers/PersonDetailContainer";
 import DictionaryContainer from "./containers/DictionaryContainer";
 import FavoritesContainer from "./containers/FavoritesContainer";
 import WordDetailContainer from "./containers/WordDetailContainer";
@@ -18,7 +15,6 @@ class App extends Component {
     super();
   }
   componentDidMount() {
-    this.props.loadPeople();
     this.props.loadWordList();
   }
   render() {
@@ -28,9 +24,6 @@ class App extends Component {
           <Navigation />
           <Switch>
             <Route path="/home" component={Intro} />
-            <Route path="/list" exact component={ListOfPersonContainer} />
-            <Route path="/create" component={CreatePeopleContainer} />
-            <Route path="/list/:id" component={PersonDetailContainer} />
             <Route path="/api" component={DictionaryContainer} />
             <Route path="/favorites" exact component={FavoritesContainer} />
             <Route path="/favorites/:id" component={WordDetailContainer} />

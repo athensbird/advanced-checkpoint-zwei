@@ -1,5 +1,4 @@
 import "whatwg-fetch";
-export const PEOPLE_LOADED = "PEOPLE_LOADED";
 export const WORD_LOADED = "WORD_LOADED";
 export const USER_LOADED = "USER_LOADED";
 export const ADDED_TO_FAVORITES = "ADDED_TO_FAVORITES";
@@ -8,32 +7,6 @@ export const CLEAR_WORD = "CLEAR_WORD";
 export const WORD_ALREADY_ADDED = "WORD_ALREADY_ADDED";
 // eslint-disable-next-line
 import ApiPaths from "../config/config";
-
-export function loadPeople() {
-  return function (dispatch) {
-    fetch(ApiPaths.API_URL + "/people")
-    // eslint-disable-next-line
-    .then((res, next) => {
-      console.log(res);
-      return res.json();
-    })
-    .then((people) => {
-      console.log(people);
-      dispatch(peopleLoaded(people));
-      return;
-    }).catch((err) => {
-      dispatch(peopleLoadedError(err));
-    });
-  };
-}
-
-export function peopleLoaded(people) {
-  console.log("People loaded!!");
-  return {
-    type: PEOPLE_LOADED,
-    value: people
-  };
-}
 
 export function userLoaded(currentUser) {
   console.log("User loaded!");
@@ -125,37 +98,6 @@ export function peopleLoadedError(err) {
   };
 }
 
-export function createPerson(person) {
-  return function (dispatch) {
-    fetch("http://localhost:3001/list", {
-      method: "POST",
-      headers: {"Content-Type": "application/json; charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-      },
-      mode: "cors",
-      cache: "default",
-      body: JSON.stringify(person)
-    }).then((res) => {
-      dispatch(loadPeople());
-      return res.json();
-    }).catch((err) => {
-      console.log(err);
-    });
-  };
-}
-
-export function deletePerson(id) {
-  return function (dispatch) {
-    console.log("Delete ID: ", id);
-    fetch("http://localhost:3001/list/" + id, {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"}
-    }).then(() => {
-      dispatch(loadPeople());
-    });
-  };
-}
-
 export function lookUp(word) {
   // eslint-disable-next-line
   return function (dispatch) {
@@ -184,6 +126,36 @@ Step 2: Use Word.findOne(array.word) to check if there is an existing user
 Step 3: If there is an existing user, return res.status(422).json(err: "err msg")
 Step 4: Build an error handling middleware
 */
+
+export function createUser(state) {
+  const user = {
+    username: state.username,
+    level: 1,
+    gamesPlayed: 0
+  }
+  return function (dispatch) {
+    fetch(ApiPaths.API_URL + "/user", {
+      method: "POST",
+      headers: {"Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        // eslint-disable-next-line
+        "Accept": "application/json "
+      },
+      mode: "cors",
+      cache: "default",
+      body: JSON.stringify(user)
+    }).then(res => {
+      if (res.status === 422) {
+        console.log("User existed!");
+      }
+      dispatch(loadUser());
+      return res.json();
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+}
+
 
 export function addToFavorites(array) {
   return function (dispatch) {

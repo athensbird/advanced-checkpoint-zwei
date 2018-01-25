@@ -27,7 +27,6 @@ const WordController = {
              ]
       }).exec()
       .then(existingWord => {
-        console.log("existingWord", existingWord);
         if (existingWord) {
           return res.status(422).json({err: "Word already in the list"});
         }

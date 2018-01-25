@@ -20,7 +20,7 @@ const UserController = {
   },
   update: (req, res, next) => {
     console.log(req.body);
-    User.findById("597f42ea6e21bd2061cac926").exec()
+    User.findById("5a694b9ca449ac0743310363").exec()
       .then(user => {
         user.username = req.body.username || user.username;
         user.level = req.body.level || user.level;

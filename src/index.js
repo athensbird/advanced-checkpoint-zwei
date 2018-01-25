@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const PeopleRoutes = require("./Routes/PeopleRoutes");
 const WordRoutes = require("./Routes/WordRoutes");
 const UserRoutes = require("./Routes/UserRoutes");
 const bodyParser = require("body-parser");
@@ -34,7 +33,6 @@ app.use((req, res, next) => {
 });
 
 app.use(UserRoutes);
-app.use(PeopleRoutes);
 app.use(WordRoutes);
 
 app.get('/api/:word', function(req,res){
